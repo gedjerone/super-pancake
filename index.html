@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Array Tasks - Задачи по массивам</title>
+    <!-- Подключаем красивый шрифт -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Подключаем Prism.js для подсветки синтаксиса -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .tasks-container {
+            padding: 30px;
+        }
+
+        .task {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .task:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-header {
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-header:hover {
+            background: #495057;
+        }
+
+        .task-title {
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .task-number {
+            background: #007bff;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .task-content {
+            padding: 25px;
+        }
+
+        .task-description {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #4a5568;
+            font-weight: 400;
+        }
+
+        .example {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #1976D2;
+            margin-bottom: 8px;
+        }
+
+        /* Стили для подсветки синтаксиса */
+        pre[class*="language-"] {
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        code[class*="language-"] {
+            font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+            font-size: 14px;
+        }
+
+        .inline-code {
+            background: #f1f5f9;
+            color: #e53e3e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+        }
+
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px 10px 0;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .button:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        .button.hint {
+            background: #28a745;
+        }
+
+        .button.hint:hover {
+            background: #1e7e34;
+        }
+
+        .button.solution {
+            background: #dc3545;
+        }
+
+        .button.solution:hover {
+            background: #c82333;
+        }
+
+        .hidden-content {
+            display: none;
+            margin-top: 15px;
+            padding: 20px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .solution-content {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hint-title,
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .hint-title {
+            color: #155724;
+        }
+
+        .solution-title {
+            color: #721c24;
+        }
+
+        .hint-content p {
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+            font-weight: 400;
+        }
+
+        .footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .task-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Go Array Tasks</h1>
+            <p class="subtitle">Изучайте работу с массивами в Go через практические задачи</p>
+        </header>
+
+        <div class="tasks-container">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number" id="completedTasks">0</div>
+                    <div class="stat-label">Выполнено задач</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Всего задач</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="hintsUsed">0</div>
+                    <div class="stat-label">Подсказок использовано</div>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Task 1: MergeArrays -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task1')">
+                    <div class="task-title">MergeArrays - Объединение массивов</div>
+                    <div class="task-number">1</div>
+                </div>
+                <div class="task-content" id="task1" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает два массива целых чисел и возвращает новый массив,
+                        содержащий элементы обоих массивов.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">MergeArrays([]int{1, 2, 3}, []int{4, 5, 6}) → []int{1, 2, 3, 4, 5, 6}</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint1')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution1')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint1">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте пустой результирующий slice</p>
+                            <p>• Используйте функцию <span class="inline-code">append()</span> для добавления элементов
+                            </p>
+                            <p>• Сначала добавьте все элементы первого массива, затем второго</p>
+                            <p>• Оператор <span class="inline-code">...</span> поможет добавить все элементы сразу</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution1">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func MergeArrays(arr1 []int, arr2 []int) []int {
+    var result []int
+    result = append(result, arr1...)
+    result = append(result, arr2...)
+    return result
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2: SplitArray -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task2')">
+                    <div class="task-title">SplitArray - Разделение массива</div>
+                    <div class="task-number">2</div>
+                </div>
+                <div class="task-content" id="task2" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и возвращает два новых массива: первый
+                        содержит элементы с четными индексами, второй - с нечетными.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">SplitArray([]int{1, 2, 3, 4, 5}) → ([]int{1, 3, 5}, []int{2, 4})</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint2')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution2')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint2">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте два пустых slice для четных и нечетных индексов</p>
+                            <p>• Переберите массив с помощью <span class="inline-code">range</span></p>
+                            <p>• Используйте оператор <span class="inline-code">%</span> для проверки четности индекса
+                            </p>
+                            <p>• Если <span class="inline-code">i % 2 == 0</span>, то индекс четный</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution2">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func SplitArray(arr []int) ([]int, []int) {
+    var evenIndexes, oddIndexes []int
+
+    for i, value := range arr {
+        if i%2 == 0 {
+            evenIndexes = append(evenIndexes, value)
+        } else {
+            oddIndexes = append(oddIndexes, value)
+        }
+    }
+
+    return evenIndexes, oddIndexes
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3: ReverseArray -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task3')">
+                    <div class="task-title">ReverseArray - Разворот массива</div>
+                    <div class="task-number">3</div>
+                </div>
+                <div class="task-content" id="task3" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и возвращает новый массив с элементами в
+                        обратном порядке.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">ReverseArray([]int{1, 2, 3}) → []int{3, 2, 1}</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint3')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution3')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint3">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте пустой результирующий slice</p>
+                            <p>• Используйте обратный цикл: идите от последнего элемента к первому</p>
+                            <p>• Начните с индекса <span class="inline-code">len(arr) - 1</span> и уменьшайте до 0</p>
+                            <p>• Добавляйте каждый элемент в результат</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution3">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func ReverseArray(arr []int) []int {
+    var result []int
+    for i := len(arr) - 1; i >= 0; i-- {
+        result = append(result, arr[i])
+    }
+    return result
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 4: MultiplyArray -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task4')">
+                    <div class="task-title">MultiplyArray - Умножение элементов</div>
+                    <div class="task-number">4</div>
+                </div>
+                <div class="task-content" id="task4" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и множитель, возвращает новый массив с
+                        каждым элементом, умноженным на множитель.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">MultiplyArray([]int{1, 2, 3}, 2) → []int{2, 4, 6}</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint4')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution4')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint4">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте пустой результирующий slice</p>
+                            <p>• Переберите каждый элемент исходного массива</p>
+                            <p>• Умножьте каждый элемент на заданный множитель</p>
+                            <p>• Добавьте результат умножения в новый массив</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution4">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func MultiplyArray(arr []int, factor int) []int {
+    var result []int
+    for _, value := range arr {
+        result = append(result, value*factor)
+    }
+    return result
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 5: FilterArrayByEven -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task5')">
+                    <div class="task-title">FilterArrayByEven - Фильтр четных чисел</div>
+                    <div class="task-number">5</div>
+                </div>
+                <div class="task-content" id="task5" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и возвращает новый массив, содержащий
+                        только четные числа.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">FilterArrayByEven([]int{1, 2, 3, 4}) → []int{2, 4}</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint5')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution5')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint5">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте пустой результирующий slice</p>
+                            <p>• Переберите каждый элемент массива</p>
+                            <p>• Проверьте четность числа с помощью <span class="inline-code">value % 2 == 0</span></p>
+                            <p>• Добавляйте в результат только четные числа</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution5">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func FilterArrayByEven(arr []int) []int {
+    var result []int
+    for _, value := range arr {
+        if value%2 == 0 {
+            result = append(result, value)
+        }
+    }
+    return result
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 6: GetArrayLength -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task6')">
+                    <div class="task-title">GetArrayLength - Длина массива</div>
+                    <div class="task-number">6</div>
+                </div>
+                <div class="task-content" id="task6" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и возвращает его длину.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">GetArrayLength([]int{1, 2, 3}) → 3</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint6')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution6')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint6">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• В Go есть встроенная функция для получения длины slice</p>
+                            <p>• Используйте функцию <span class="inline-code">len()</span></p>
+                            <p>• Это самая простая задача из всех!</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution6">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func GetArrayLength(arr []int) int {
+    return len(arr)
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 7: GetArraySum -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task7')">
+                    <div class="task-title">GetArraySum - Сумма элементов</div>
+                    <div class="task-number">7</div>
+                </div>
+                <div class="task-content" id="task7" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и возвращает сумму всех его элементов.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">GetArraySum([]int{1, 2, 3}) → 6</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint7')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution7')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint7">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте переменную для хранения суммы (начальное значение 0)</p>
+                            <p>• Переберите все элементы массива</p>
+                            <p>• Добавляйте каждый элемент к общей сумме</p>
+                            <p>• Верните итоговую сумму</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution7">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func GetArraySum(arr []int) int {
+    sum := 0
+    for _, value := range arr {
+        sum += value
+    }
+    return sum
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 8: GetLastArrayElement -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task8')">
+                    <div class="task-title">GetLastArrayElement - Последний элемент</div>
+                    <div class="task-number">8</div>
+                </div>
+                <div class="task-content" id="task8" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и возвращает последний элемент массива.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">GetLastArrayElement([]int{1, 2, 3}) → 3</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint8')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution8')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint8">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Проверьте, что массив не пустой</p>
+                            <p>• Используйте <span class="inline-code">len(arr)</span> для получения длины</p>
+                            <p>• Последний элемент находится по индексу <span class="inline-code">len(arr) - 1</span>
+                            </p>
+                            <p>• Не забудьте обработать случай пустого массива</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution8">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func GetLastArrayElement(arr []int) int {
+    if len(arr) == 0 {
+        return 0
+    }
+    return arr[len(arr)-1]
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 9: CreateArrayWithRange -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task9')">
+                    <div class="task-title">CreateArrayWithRange - Создание диапазона</div>
+                    <div class="task-number">9</div>
+                </div>
+                <div class="task-content" id="task9" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает два целых числа (start и end) и возвращает массив,
+                        содержащий все целые числа в этом диапазоне включительно.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">CreateArrayWithRange(1, 5) → []int{1, 2, 3, 4, 5}</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint9')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution9')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint9">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Проверьте, что start не больше end</p>
+                            <p>• Создайте пустой результирующий slice</p>
+                            <p>• Используйте цикл от start до end включительно</p>
+                            <p>• Добавляйте каждое число в результат</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution9">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func CreateArrayWithRange(start int, end int) []int {
+    if start > end {
+        return []int{}
+    }
+
+    var result []int
+    for i := start; i <= end; i++ {
+        result = append(result, i)
+    }
+    return result
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 10: FindArrayElement -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('task10')">
+                    <div class="task-title">FindArrayElement - Поиск элемента</div>
+                    <div class="task-number">10</div>
+                </div>
+                <div class="task-content" id="task10" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает массив целых чисел и элемент для поиска. Возвращает индекс
+                        элемента в массиве или -1, если элемент не найден.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">FindArrayElement([]int{1, 2, 3}, 2) → 1</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hint10')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solution10')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hint10">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Переберите массив с получением индекса и значения</p>
+                            <p>• Сравните каждый элемент с искомым значением</p>
+                            <p>• Если нашли совпадение, верните текущий индекс</p>
+                            <p>• Если цикл завершился без находок, верните -1</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solution10">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func FindArrayElement(arr []int, element int) int {
+    for i, value := range arr {
+        if value == element {
+            return i
+        }
+    }
+    return -1
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎓 Удачи в изучении Go! Практикуйтесь и становитесь лучше каждый день.</p>
+        </div>
+    </div>
+
+    <!-- Подключаем Prism.js для подсветки синтаксиса -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script>
+        let completedTasks = 0;
+        let hintsUsed = 0;
+
+        function toggleTask(taskId) {
+            const taskContent = document.getElementById(taskId);
+            if (taskContent.style.display === 'none' || taskContent.style.display === '') {
+                taskContent.style.display = 'block';
+            } else {
+                taskContent.style.display = 'none';
+            }
+        }
+
+        function toggleHint(hintId) {
+            const hint = document.getElementById(hintId);
+            if (hint.style.display === 'none' || hint.style.display === '') {
+                hint.style.display = 'block';
+                hintsUsed++;
+                document.getElementById('hintsUsed').textContent = hintsUsed;
+            } else {
+                hint.style.display = 'none';
+            }
+        }
+
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            if (solution.style.display === 'none' || solution.style.display === '') {
+                solution.style.display = 'block';
+                completedTasks++;
+                document.getElementById('completedTasks').textContent = completedTasks;
+                updateProgress();
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        function updateProgress() {
+            const progress = (completedTasks / 10) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        // Настройка автозагрузчика Prism.js для Go
+        window.Prism = window.Prism || {};
+        window.Prism.plugins = window.Prism.plugins || {};
+        window.Prism.plugins.autoloader = window.Prism.plugins.autoloader || {};
+        window.Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+    </script>
+</body>
+
+</html>
