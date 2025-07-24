@@ -280,6 +280,80 @@
             font-weight: 400;
         }
 
+        /* Стили для квизов */
+        .quiz-container {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #495057;
+        }
+
+        .quiz-options {
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .quiz-option:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+
+        .quiz-option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .quiz-option.wrong {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .quiz-option input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .quiz-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .quiz-result.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .quiz-result.wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -318,7 +392,7 @@
                     <div class="stat-label">Выполнено задач</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">10</div>
+                    <div class="stat-number">30</div>
                     <div class="stat-label">Всего задач</div>
                 </div>
                 <div class="stat">
@@ -746,6 +820,995 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Разделитель для задач на циклы и условия -->
+            <div style="margin: 40px 0; text-align: center; color: #6c757d; font-size: 1.2em; font-weight: 600;">
+                🔄 Задачи на циклы и условия
+            </div>
+
+            <!-- Basics Task 1: IsEven -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic1')">
+                    <div class="task-title">IsEven - Проверка четности</div>
+                    <div class="task-number">B1</div>
+                </div>
+                <div class="task-content" id="basic1" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает целое число и возвращает true, если число четное, и false,
+                        если нечетное.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">IsEven(4) → true
+IsEven(7) → false</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB1')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB1')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB1">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Используйте оператор остатка от деления <span class="inline-code">%</span></p>
+                            <p>• Четное число дает остаток 0 при делении на 2</p>
+                            <p>• Используйте условие <span class="inline-code">if</span></p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB1">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func IsEven(n int) bool {
+    return n%2 == 0
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 2: CountNumbers -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic2')">
+                    <div class="task-title">CountNumbers - Счет от 1 до N</div>
+                    <div class="task-number">B2</div>
+                </div>
+                <div class="task-content" id="basic2" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает число N и выводит все числа от 1 до N включительно.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">CountNumbers(5) → выводит: 1 2 3 4 5</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB2')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB2')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB2">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Используйте цикл <span class="inline-code">for</span></p>
+                            <p>• Начните с 1 и идите до N включительно</p>
+                            <p>• Используйте <span class="inline-code">fmt.Print()</span> для вывода</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB2">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func CountNumbers(n int) {
+    for i := 1; i <= n; i++ {
+        fmt.Print(i, " ")
+    }
+    fmt.Println()
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 3: SumToN -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic3')">
+                    <div class="task-title">SumToN - Сумма от 1 до N</div>
+                    <div class="task-number">B3</div>
+                </div>
+                <div class="task-content" id="basic3" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает число N и возвращает сумму всех чисел от 1 до N.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">SumToN(5) → 15  // 1+2+3+4+5 = 15</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB3')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB3')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB3">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте переменную для накопления суммы</p>
+                            <p>• Используйте цикл от 1 до N</p>
+                            <p>• Добавляйте каждое число к сумме</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB3">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func SumToN(n int) int {
+    sum := 0
+    for i := 1; i <= n; i++ {
+        sum += i
+    }
+    return sum
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 4: Factorial -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic4')">
+                    <div class="task-title">Factorial - Факториал числа</div>
+                    <div class="task-number">B4</div>
+                </div>
+                <div class="task-content" id="basic4" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает число N и возвращает его факториал (N!).
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">Factorial(5) → 120  // 5! = 5*4*3*2*1 = 120</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB4')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB4')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB4">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Создайте переменную result с начальным значением 1</p>
+                            <p>• Используйте цикл от 1 до N</p>
+                            <p>• Умножайте result на каждое число</p>
+                            <p>• Обработайте случай N = 0 (0! = 1)</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB4">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func Factorial(n int) int {
+    if n == 0 {
+        return 1
+    }
+    result := 1
+    for i := 1; i <= n; i++ {
+        result *= i
+    }
+    return result
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 5: IsPrime -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic5')">
+                    <div class="task-title">IsPrime - Проверка простого числа</div>
+                    <div class="task-number">B5</div>
+                </div>
+                <div class="task-content" id="basic5" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает число N и возвращает true, если число простое, и false в
+                        противном случае.
+                        Простое число - это число больше 1, которое делится только на 1 и на себя.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">IsPrime(7) → true   // 7 делится только на 1 и 7
+IsPrime(8) → false  // 8 делится на 1, 2, 4, 8
+IsPrime(2) → true   // 2 - простое число</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB5')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB5')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB5">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Числа меньше 2 не являются простыми</p>
+                            <p>• Проверьте деление на все числа от 2 до √n</p>
+                            <p>• Если найден делитель, число не простое</p>
+                            <p>• Можно проверять только до <span class="inline-code">i*i <= n</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB5">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func IsPrime(n int) bool {
+    if n < 2 {
+        return false
+    }
+    for i := 2; i*i <= n; i++ {
+        if n%i == 0 {
+            return false
+        }
+    }
+    return true
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 6: FindMax -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic6')">
+                    <div class="task-title">FindMax - Максимальное из двух чисел</div>
+                    <div class="task-number">B6</div>
+                </div>
+                <div class="task-content" id="basic6" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает два числа и возвращает большее из них.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">FindMax(10, 25) → 25
+FindMax(100, 50) → 100</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB6')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB6')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB6">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Используйте условие <span class="inline-code">if-else</span></p>
+                            <p>• Сравните два числа с помощью оператора <span class="inline-code">></span></p>
+                            <p>• Верните подходящее число в каждом случае</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB6">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func FindMax(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 7: MultiplicationTable -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic7')">
+                    <div class="task-title">MultiplicationTable - Таблица умножения</div>
+                    <div class="task-number">B7</div>
+                </div>
+                <div class="task-content" id="basic7" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает число N и выводит таблицу умножения для этого числа (от 1 до
+                        10).
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">MultiplicationTable(3) → выводит:
+3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9
+...</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB7')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB7')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB7">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Используйте цикл от 1 до 10</p>
+                            <p>• В каждой итерации выводите результат умножения</p>
+                            <p>• Используйте <span class="inline-code">fmt.Printf()</span> для форматированного вывода
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB7">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func MultiplicationTable(n int) {
+    for i := 1; i <= 10; i++ {
+        fmt.Printf("%d x %d = %d\n", n, i, n*i)
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 8: CountDigits -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic8')">
+                    <div class="task-title">CountDigits - Подсчет цифр в числе</div>
+                    <div class="task-number">B8</div>
+                </div>
+                <div class="task-content" id="basic8" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает целое число и возвращает количество цифр в нем.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">CountDigits(12345) → 5
+CountDigits(7) → 1</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB8')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB8')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB8">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Используйте цикл <span class="inline-code">for</span> с условием</p>
+                            <p>• Делите число на 10 в каждой итерации</p>
+                            <p>• Считайте количество операций деления</p>
+                            <p>• Обработайте случай числа 0</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB8">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func CountDigits(n int) int {
+    if n == 0 {
+        return 1
+    }
+    if n < 0 {
+        n = -n
+    }
+    count := 0
+    for n > 0 {
+        n /= 10
+        count++
+    }
+    return count
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 9: ReverseNumber -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic9')">
+                    <div class="task-title">ReverseNumber - Переворот числа</div>
+                    <div class="task-number">B9</div>
+                </div>
+                <div class="task-content" id="basic9" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает целое число и возвращает число с цифрами в обратном порядке.
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">ReverseNumber(12345) → 54321
+ReverseNumber(100) → 1
+ReverseNumber(7) → 7</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB9')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB9')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB9">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Используйте цикл для извлечения цифр справа налево</p>
+                            <p>• Получайте последнюю цифру через <span class="inline-code">n % 10</span></p>
+                            <p>• Стройте результат: <span class="inline-code">result = result*10 + digit</span></p>
+                            <p>• Убирайте последнюю цифру: <span class="inline-code">n = n / 10</span></p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB9">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func ReverseNumber(n int) int {
+    if n < 0 {
+        return -ReverseNumber(-n)
+    }
+    
+    result := 0
+    for n > 0 {
+        digit := n % 10
+        result = result*10 + digit
+        n = n / 10
+    }
+    return result
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basics Task 10: CheckGrade -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('basic10')">
+                    <div class="task-title">CheckGrade - Определение оценки</div>
+                    <div class="task-number">B10</div>
+                </div>
+                <div class="task-content" id="basic10" style="display: none;">
+                    <div class="task-description">
+                        Создайте функцию, которая принимает балл (0-100) и возвращает соответствующую оценку:
+                        90-100: "A", 80-89: "B", 70-79: "C", 60-69: "D", менее 60: "F".
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Пример:</div>
+                        <pre><code class="language-go">CheckGrade(95) → "A"
+CheckGrade(75) → "C"
+CheckGrade(45) → "F"</code></pre>
+                    </div>
+                    <button class="button hint" onclick="toggleHint('hintB10')">💡 Показать подсказку</button>
+                    <button class="button solution" onclick="toggleSolution('solutionB10')">🔍 Показать решение</button>
+
+                    <div class="hidden-content" id="hintB10">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div class="hint-content">
+                            <p>• Используйте последовательность <span class="inline-code">if-else if</span></p>
+                            <p>• Проверяйте диапазоны от большего к меньшему</p>
+                            <p>• Начните с проверки score >= 90</p>
+                            <p>• Последний случай - это оценка "F"</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden-content solution-content" id="solutionB10">
+                        <div class="solution-title">🔍 Решение:</div>
+                        <pre><code class="language-go">func CheckGrade(score int) string {
+    if score >= 90 {
+        return "A"
+    } else if score >= 80 {
+        return "B"
+    } else if score >= 70 {
+        return "C"
+    } else if score >= 60 {
+        return "D"
+    } else {
+        return "F"
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Разделитель для задач на слайсы -->
+            <div style="margin: 40px 0; text-align: center; color: #6c757d; font-size: 1.2em; font-weight: 600;">
+                🧠 Задачи на понимание слайсов и append
+            </div>
+
+            <!-- Slice Task 1 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice1')">
+                    <div class="task-title">Slice Quiz 1 - Базовый append</div>
+                    <div class="task-number">S1</div>
+                </div>
+                <div class="task-content" id="slice1" style="display: none;">
+                    <div class="task-description">
+                        Проанализируйте код и определите, что произойдет с исходным слайсом:
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">arr := []int{1, 2, 3}
+fmt.Printf("len=%d, cap=%d\n", len(arr), cap(arr)) // len=3, cap=3
+arr1 := append(arr, 4)
+fmt.Println(arr)  // ?
+fmt.Println(arr1) // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice1" data-answer="wrong1">
+                                <span>arr: [1, 2, 3, 4], arr1: [1, 2, 3, 4]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice1" data-answer="correct">
+                                <span>arr: [1, 2, 3], arr1: [1, 2, 3, 4]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice1" data-answer="wrong2">
+                                <span>arr: [1, 2, 3], arr1: [1, 2, 3]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice1')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice1"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice1" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• Исходный слайс имеет capacity = 3, что равно его длине</p>
+                            <p>• При добавлении элемента capacity не хватает</p>
+                            <p>• Go создает новый underlying array с большей capacity</p>
+                            <p>• Исходный слайс остается неизменным: [1, 2, 3]</p>
+                            <p>• Новый слайс получает копию данных + новый элемент: [1, 2, 3, 4]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 2 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice2')">
+                    <div class="task-title">Slice Quiz 2 - Append с достаточной capacity</div>
+                    <div class="task-number">S2</div>
+                </div>
+                <div class="task-content" id="slice2" style="display: none;">
+                    <div class="task-description">
+                        Проанализируйте код, где у слайса есть запасная capacity:
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">arr := make([]int, 3, 5) // len=3, cap=5
+arr[0], arr[1], arr[2] = 1, 2, 3
+fmt.Printf("len=%d, cap=%d\n", len(arr), cap(arr))
+arr1 := append(arr, 4)
+fmt.Println(arr)  // ?
+fmt.Println(arr1) // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice2" data-answer="correct">
+                                <span>arr: [1, 2, 3, 4], arr1: [1, 2, 3, 4]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice2" data-answer="wrong1">
+                                <span>arr: [1, 2, 3], arr1: [1, 2, 3, 4]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice2" data-answer="wrong2">
+                                <span>arr: [1, 2, 3], arr1: [1, 2, 3]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice2')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice2"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice2" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• Слайс создан с capacity = 5, но длиной = 3</p>
+                            <p>• Есть запасное место в underlying array</p>
+                            <p>• append не создает новый массив, а использует существующий</p>
+                            <p>• Оба слайса ссылаются на один underlying array</p>
+                            <p>• Изменение затрагивает оба слайса: arr и arr1 показывают [1, 2, 3, 4]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 3 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice3')">
+                    <div class="task-title">Slice Quiz 3 - Множественный append</div>
+                    <div class="task-number">S3</div>
+                </div>
+                <div class="task-content" id="slice3" style="display: none;">
+                    <div class="task-description">
+                        Что произойдет при добавлении нескольких элементов одновременно?
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">arr := []int{1, 2, 3, 4, 5}  // len=5, cap=5
+arr1 := append(arr, 6)
+arr2 := append(arr, 7, 8)
+fmt.Println(arr)  // ?
+fmt.Println(arr1) // ?
+fmt.Println(arr2) // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice3" data-answer="wrong1">
+                                <span>arr: [1,2,3,4,5,6], arr1: [1,2,3,4,5,6], arr2: [1,2,3,4,5,7,8]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice3" data-answer="correct">
+                                <span>arr: [1,2,3,4,5], arr1: [1,2,3,4,5,6], arr2: [1,2,3,4,5,7,8]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice3" data-answer="wrong2">
+                                <span>arr: [1,2,3,4,5], arr1: [1,2,3,4,5,7], arr2: [1,2,3,4,5,7,8]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice3')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice3"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice3" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• Исходный слайс заполнен полностью (len = cap = 5)</p>
+                            <p>• Каждый append создает новый underlying array</p>
+                            <p>• arr остается неизменным: [1, 2, 3, 4, 5]</p>
+                            <p>• arr1 и arr2 - независимые слайсы с новыми массивами</p>
+                            <p>• Каждый append работает с оригинальным arr, а не с результатом предыдущего</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 4 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice4')">
+                    <div class="task-title">Slice Quiz 4 - Append к срезу</div>
+                    <div class="task-number">S4</div>
+                </div>
+                <div class="task-content" id="slice4" style="display: none;">
+                    <div class="task-description">
+                        Что произойдет при работе с срезом слайса?
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">original := []int{1, 2, 3, 4, 5, 6} // len=6, cap=6
+slice1 := original[1:4]  // [2, 3, 4] len=3, cap=5
+slice2 := append(slice1, 99)
+fmt.Println(original) // ?
+fmt.Println(slice1)   // ?
+fmt.Println(slice2)   // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice4" data-answer="wrong1">
+                                <span>original: [1,2,3,4,5,6], slice1: [2,3,4], slice2: [2,3,4,99]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice4" data-answer="correct">
+                                <span>original: [1,2,3,4,99,6], slice1: [2,3,4], slice2: [2,3,4,99]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice4" data-answer="wrong2">
+                                <span>original: [1,2,3,4,5,6], slice1: [2,3,4,99], slice2: [2,3,4,99]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice4')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice4"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice4" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• slice1 ссылается на элементы [1:4] в original (индексы 1,2,3)</p>
+                            <p>• capacity slice1 = 5 (от позиции 1 до конца original)</p>
+                            <p>• При append(slice1, 99) есть место в underlying array</p>
+                            <p>• 99 записывается в позицию 4 original массива</p>
+                            <p>• original изменяется: [1,2,3,4,99,6], но slice1 видит только [2,3,4]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 5 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice5')">
+                    <div class="task-title">Slice Quiz 5 - Переполнение capacity</div>
+                    <div class="task-number">S5</div>
+                </div>
+                <div class="task-content" id="slice5" style="display: none;">
+                    <div class="task-description">
+                        Что случится при превышении capacity у среза?
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">original := []int{1, 2, 3, 4}      // len=4, cap=4
+slice1 := original[1:3]            // [2, 3] len=2, cap=3
+slice2 := append(slice1, 99, 100, 101)
+fmt.Println(original) // ?
+fmt.Println(slice1)   // ?
+fmt.Println(slice2)   // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice5" data-answer="wrong1">
+                                <span>original: [1,2,3,99,100,101], slice1: [2,3], slice2: [2,3,99,100,101]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice5" data-answer="correct">
+                                <span>original: [1,2,3,99], slice1: [2,3], slice2: [2,3,99,100,101]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice5" data-answer="wrong2">
+                                <span>original: [1,2,3,4], slice1: [2,3], slice2: [2,3,99,100,101]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice5')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice5"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice5" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• slice1 имеет capacity = 3 (может добавить только 1 элемент)</p>
+                            <p>• При добавлении 3 элементов capacity недостаточно</p>
+                            <p>• Go создает новый underlying array для slice2</p>
+                            <p>• Первый элемент 99 помещается в original (есть место)</p>
+                            <p>• Остальные элементы 100,101 идут в новый массив для slice2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 6 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice6')">
+                    <div class="task-title">Slice Quiz 6 - Сложный случай</div>
+                    <div class="task-number">S6</div>
+                </div>
+                <div class="task-content" id="slice6" style="display: none;">
+                    <div class="task-description">
+                        Финальный тест на понимание поведения слайсов:
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">a := make([]int, 2, 4)         // [0, 0] len=2, cap=4
+a[0], a[1] = 1, 2
+b := append(a, 3)              // что с a и b?
+c := append(a, 4)              // что с a, b и c?
+fmt.Println(a) // ?
+fmt.Println(b) // ?
+fmt.Println(c) // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice6" data-answer="wrong1">
+                                <span>a: [1,2], b: [1,2,3], c: [1,2,4]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice6" data-answer="wrong2">
+                                <span>a: [1,2,4], b: [1,2,3], c: [1,2,4]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice6" data-answer="correct">
+                                <span>a: [1,2], b: [1,2,4], c: [1,2,4]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice6')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice6"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice6" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• Слайс 'a' имеет capacity = 4, может добавлять элементы</p>
+                            <p>• append(a, 3) создает 'b', добавляет 3 в позицию 2</p>
+                            <p>• append(a, 4) создает 'c', тоже добавляет в позицию 2, перезаписывая 3</p>
+                            <p>• Все слайсы используют один underlying array</p>
+                            <p>• В итоге: a видит [1,2], но b и c видят [1,2,4] (4 перезаписало 3)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 7 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice7')">
+                    <div class="task-title">Slice Quiz 7 - Copy vs Append</div>
+                    <div class="task-number">S7</div>
+                </div>
+                <div class="task-content" id="slice7" style="display: none;">
+                    <div class="task-description">
+                        Сравните поведение copy() и append() на одних и тех же данных:
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">source := []int{10, 20, 30}
+target1 := make([]int, 3)
+copy(target1, source)
+target1[0] = 99
+
+target2 := append([]int{}, source...)
+target2[0] = 88
+
+fmt.Println(source)  // ?
+fmt.Println(target1) // ?
+fmt.Println(target2) // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice7" data-answer="wrong1">
+                                <span>source: [99,20,30], target1: [99,20,30], target2: [88,20,30]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice7" data-answer="correct">
+                                <span>source: [10,20,30], target1: [99,20,30], target2: [88,20,30]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice7" data-answer="wrong2">
+                                <span>source: [88,20,30], target1: [99,20,30], target2: [88,20,30]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice7')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice7"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice7" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• copy() и append() создают независимые копии данных</p>
+                            <p>• target1 создается через make() и copy() - новый underlying array</p>
+                            <p>• target2 создается через append() к пустому слайсу - тоже новый массив</p>
+                            <p>• Изменения в target1 и target2 не влияют на source</p>
+                            <p>• source остается неизменным: [10, 20, 30]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 8 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice8')">
+                    <div class="task-title">Slice Quiz 8 - Nested Append</div>
+                    <div class="task-number">S8</div>
+                </div>
+                <div class="task-content" id="slice8" style="display: none;">
+                    <div class="task-description">
+                        Что происходит при вложенных операциях append?
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">base := make([]int, 2, 6)  // [0, 0] len=2, cap=6
+base[0], base[1] = 1, 2
+
+step1 := append(base, 3)          // [1, 2, 3]
+step2 := append(step1, 4, 5)      // [1, 2, 3, 4, 5]
+step3 := append(base, 9)          // что тут?
+
+fmt.Println(base)  // ?
+fmt.Println(step1) // ?
+fmt.Println(step2) // ?
+fmt.Println(step3) // ?</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Что будет выведено?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice8" data-answer="wrong1">
+                                <span>base: [1,2], step1: [1,2,3], step2: [1,2,3,4,5], step3: [1,2,9]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice8" data-answer="correct">
+                                <span>base: [1,2], step1: [1,2,9], step2: [1,2,9,4,5], step3: [1,2,9]</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice8" data-answer="wrong2">
+                                <span>base: [1,2,9], step1: [1,2,9], step2: [1,2,3,4,5], step3: [1,2,9]</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice8')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice8"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice8" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• Все операции используют один underlying array (capacity = 6)</p>
+                            <p>• step1 добавляет 3 в позицию 2: [1,2,3,?,?,?]</p>
+                            <p>• step2 добавляет 4,5 в позиции 3,4: [1,2,3,4,5,?]</p>
+                            <p>• step3 добавляет 9 в позицию 2, перезаписывая 3: [1,2,9,4,5,?]</p>
+                            <p>• step1 и step2 видят изменения, так как используют тот же массив</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 9 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice9')">
+                    <div class="task-title">Slice Quiz 9 - Capacity Doubling</div>
+                    <div class="task-number">S9</div>
+                </div>
+                <div class="task-content" id="slice9" style="display: none;">
+                    <div class="task-description">
+                        Изучите, как Go увеличивает capacity при росте слайса:
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">s := []int{1, 2}               // len=2, cap=2
+fmt.Printf("Initial: len=%d, cap=%d\n", len(s), cap(s))
+
+s = append(s, 3)               // что с capacity?
+fmt.Printf("After 1: len=%d, cap=%d\n", len(s), cap(s))
+
+s = append(s, 4, 5)            // что теперь?
+fmt.Printf("After 2: len=%d, cap=%d\n", len(s), cap(s))</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Какие значения capacity будут выведены?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice9" data-answer="wrong1">
+                                <span>Initial: cap=2, After 1: cap=3, After 2: cap=5</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice9" data-answer="correct">
+                                <span>Initial: cap=2, After 1: cap=4, After 2: cap=8</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice9" data-answer="wrong2">
+                                <span>Initial: cap=2, After 1: cap=4, After 2: cap=6</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice9')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice9"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice9" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• Go удваивает capacity при превышении для маленьких слайсов</p>
+                            <p>• Начальная capacity = 2</p>
+                            <p>• При добавлении 3-го элемента: capacity = 2 * 2 = 4</p>
+                            <p>• При добавлении 4-го и 5-го элементов: нужна capacity ≥ 5</p>
+                            <p>• Go снова удваивает: 4 * 2 = 8</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slice Task 10 -->
+            <div class="task">
+                <div class="task-header" onclick="toggleTask('slice10')">
+                    <div class="task-title">Slice Quiz 10 - Nil vs Empty</div>
+                    <div class="task-number">S10</div>
+                </div>
+                <div class="task-content" id="slice10" style="display: none;">
+                    <div class="task-description">
+                        В чем разница между nil слайсом и пустым слайсом?
+                    </div>
+                    <div class="example">
+                        <div class="example-title">Код:</div>
+                        <pre><code class="language-go">var nilSlice []int
+emptySlice := []int{}
+madeSlice := make([]int, 0)
+
+fmt.Printf("nil: len=%d, cap=%d, nil=%t\n", 
+    len(nilSlice), cap(nilSlice), nilSlice == nil)
+fmt.Printf("empty: len=%d, cap=%d, nil=%t\n", 
+    len(emptySlice), cap(emptySlice), emptySlice == nil)
+fmt.Printf("made: len=%d, cap=%d, nil=%t\n", 
+    len(madeSlice), cap(madeSlice), madeSlice == nil)</code></pre>
+                    </div>
+
+                    <div class="quiz-container">
+                        <div class="quiz-question">Какие значения nil будут выведены?</div>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice10" data-answer="wrong1">
+                                <span>nil: nil=true, empty: nil=true, made: nil=true</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice10" data-answer="correct">
+                                <span>nil: nil=true, empty: nil=false, made: nil=false</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="checkbox" data-quiz="slice10" data-answer="wrong2">
+                                <span>nil: nil=false, empty: nil=false, made: nil=false</span>
+                            </label>
+                        </div>
+                        <button class="button hint" onclick="checkQuiz('slice10')">✅ Проверить ответ</button>
+                        <div class="quiz-result" id="result-slice10"></div>
+                    </div>
+
+                    <div class="hidden-content" id="explanation-slice10" style="display: none;">
+                        <div class="hint-title">💡 Объяснение:</div>
+                        <div class="hint-content">
+                            <p>• nil слайс: не имеет underlying array, pointer = nil</p>
+                            <p>• []int{}: пустой слайс с underlying array, pointer ≠ nil</p>
+                            <p>• make([]int, 0): тоже создает underlying array, pointer ≠ nil</p>
+                            <p>• Все имеют len=0, cap=0, но только nil слайс равен nil</p>
+                            <p>• append() работает одинаково со всеми тремя</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
@@ -761,6 +1824,7 @@
     <script>
         let completedTasks = 0;
         let hintsUsed = 0;
+        let quizResults = {};
 
         function toggleTask(taskId) {
             const taskContent = document.getElementById(taskId);
@@ -795,8 +1859,70 @@
         }
 
         function updateProgress() {
-            const progress = (completedTasks / 10) * 100;
+            const totalTasks = 30; // 10 обычных задач + 10 задач на циклы/условия + 10 задач на слайсы
+            const completed = completedTasks + Object.values(quizResults).filter(x => x).length;
+            const progress = (completed / totalTasks) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function checkQuiz(quizId) {
+            const checkboxes = document.querySelectorAll(`input[data-quiz="${quizId}"]`);
+            let selectedAnswers = [];
+            let correctAnswer = null;
+
+            // Сначала снимаем все чекбоксы кроме выбранного
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedAnswers.push(checkbox.dataset.answer);
+                    correctAnswer = checkbox.dataset.answer;
+                } else {
+                    checkbox.checked = false;
+                }
+            });
+
+            if (selectedAnswers.length === 0) {
+                alert('Пожалуйста, выберите один ответ!');
+                return;
+            }
+
+            if (selectedAnswers.length > 1) {
+                alert('Выберите только один ответ!');
+                checkboxes.forEach(cb => cb.checked = false);
+                return;
+            }
+
+            const resultDiv = document.getElementById(`result-${quizId}`);
+            const explanationDiv = document.getElementById(`explanation-${quizId}`);
+            const isCorrect = correctAnswer === 'correct';
+
+            // Отмечаем варианты ответов
+            checkboxes.forEach(checkbox => {
+                const option = checkbox.closest('.quiz-option');
+                option.classList.remove('correct', 'wrong');
+
+                if (checkbox.dataset.answer === 'correct') {
+                    option.classList.add('correct');
+                } else if (checkbox.checked) {
+                    option.classList.add('wrong');
+                }
+            });
+
+            // Показываем результат
+            resultDiv.style.display = 'block';
+            resultDiv.className = `quiz-result ${isCorrect ? 'correct' : 'wrong'}`;
+
+            if (isCorrect) {
+                resultDiv.innerHTML = '✅ Правильно! Отличное понимание работы слайсов!';
+                quizResults[quizId] = true;
+            } else {
+                resultDiv.innerHTML = '❌ Неправильно. Изучите объяснение ниже.';
+                quizResults[quizId] = false;
+            }
+
+            // Показываем объяснение
+            explanationDiv.style.display = 'block';
+
+            updateProgress();
         }
 
         // Настройка автозагрузчика Prism.js для Go
@@ -804,6 +1930,22 @@
         window.Prism.plugins = window.Prism.plugins || {};
         window.Prism.plugins.autoloader = window.Prism.plugins.autoloader || {};
         window.Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+
+        // Обработчик для чекбоксов - только один может быть выбран
+        document.addEventListener('change', function (e) {
+            if (e.target.type === 'checkbox' && e.target.dataset.quiz) {
+                const quizId = e.target.dataset.quiz;
+                const checkboxes = document.querySelectorAll(`input[data-quiz="${quizId}"]`);
+
+                if (e.target.checked) {
+                    checkboxes.forEach(cb => {
+                        if (cb !== e.target) {
+                            cb.checked = false;
+                        }
+                    });
+                }
+            }
+        });
     </script>
 </body>
 
