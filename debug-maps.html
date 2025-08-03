@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Отладка Maps Tasks</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/maps-tasks.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body style="background: #f8f9fa; padding: 20px;">
+    <div class="container" style="max-width: 1000px; margin: 0 auto;">
+        <h1 style="text-align: center; color: #667eea; margin-bottom: 30px;">
+            🔧 Отладка компонента задач на мапы
+        </h1>
+
+        <div id="debug-info" style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+            <h3>Информация для отладки:</h3>
+            <div id="debug-output"></div>
+            <button onclick="runDebugTests()"
+                style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                🧪 Запустить тесты
+            </button>
+        </div>
+
+        <ui-include src="tasks/maps-tasks.html"></ui-include>
+    </div>
+
+    <script src="scripts/script.js"></script>
+    <script>
+        // Отладочные функции
+        function runDebugTests() {
+            const debugOutput = document.getElementById('debug-output');
+            let output = [];
+
+            // Проверяем доступность функций
+            output.push(`checkMapQuiz функция: ${typeof checkMapQuiz !== 'undefined' ? '✅ Доступна' : '❌ Не найдена'}`);
+            output.push(`checkMapCode функция: ${typeof checkMapCode !== 'undefined' ? '✅ Доступна' : '❌ Не найдена'}`);
+            output.push(`toggleTask функция: ${typeof toggleTask !== 'undefined' ? '✅ Доступна' : '❌ Не найдена'}`);
+
+            // Проверяем наличие элементов
+            const quiz1 = document.getElementById('result-mapQuiz1');
+            output.push(`Элемент result-mapQuiz1: ${quiz1 ? '✅ Найден' : '❌ Не найден'}`);
+
+            const codeInput1 = document.getElementById('code-mapCode1');
+            output.push(`Элемент code-mapCode1: ${codeInput1 ? '✅ Найден' : '❌ Не найден'}`);
+
+            const radioButtons = document.querySelectorAll('input[name="mapQuiz1"]');
+            output.push(`Radio кнопки mapQuiz1: ${radioButtons.length} найдено`);
+
+            // Проверяем переменные
+            if (typeof mapCodeSolutions !== 'undefined') {
+                output.push(`mapCodeSolutions: ✅ Доступна (${Object.keys(mapCodeSolutions).length} решений)`);
+            } else {
+                output.push(`mapCodeSolutions: ❌ Не найдена`);
+            }
+
+            debugOutput.innerHTML = output.join('<br>');
+        }
+
+        // Тестовая функция для проверки квиза вручную
+        function testQuiz() {
+            console.log('Тестируем квиз...');
+            if (typeof checkMapQuiz !== 'undefined') {
+                checkMapQuiz('mapQuiz1', 'correct', 'Тестовое объяснение');
+            } else {
+                console.error('checkMapQuiz не найдена!');
+            }
+        }
+
+        // Запускаем отладку после загрузки
+        window.addEventListener('load', () => {
+            setTimeout(runDebugTests, 1000);
+        });
+
+        // Слушаем события загрузки компонентов
+        document.addEventListener('component-loaded', (event) => {
+            console.log('Компонент загружен:', event.detail);
+            setTimeout(runDebugTests, 500);
+        });
+    </script>
+</body>
+
+</html>

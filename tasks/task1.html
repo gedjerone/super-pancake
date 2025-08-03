@@ -1,0 +1,420 @@
+<!-- Task 1: CheckPositive -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task1')">
+        <div class="task-title">CheckPositive - Проверка положительного числа</div>
+        <div class="task-number">1</div>
+    </div>
+    <div class="task-content" id="task1" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число и возвращает true, если число положительное, и
+            false в
+            противном случае.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">CheckPositive(5) → true
+CheckPositive(-3) → false
+CheckPositive(0) → false</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint1')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution1')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint1">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте условие if для проверки числа</p>
+                <p>• Положительное число больше нуля</p>
+                <p>• Сравните с помощью оператора ></p>
+                <p>• Верните соответствующее булево значение</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution1">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CheckPositive(n int) bool {
+    return n > 0
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 2: FindOdds -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task2')">
+        <div class="task-title">FindOdds - Поиск нечетных чисел</div>
+        <div class="task-number">2</div>
+    </div>
+    <div class="task-content" id="task2" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает слайс целых чисел и возвращает новый слайс, содержащий
+            только нечетные числа.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">FindOdds([]int{1, 2, 3, 4, 5, 6}) → []int{1, 3, 5}</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint2')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution2')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint2">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте пустой слайс для результата</p>
+                <p>• Переберите входной слайс с помощью range</p>
+                <p>• Используйте оператор % для проверки остатка от деления на 2</p>
+                <p>• Если остаток равен 1, число нечетное</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution2">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func FindOdds(numbers []int) []int {
+    var result []int
+    for _, num := range numbers {
+        if num%2 == 1 {
+            result = append(result, num)
+        }
+    }
+    return result
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 3: CountElements -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task3')">
+        <div class="task-title">CountElements - Подсчет элементов</div>
+        <div class="task-number">3</div>
+    </div>
+    <div class="task-content" id="task3" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает слайс целых чисел и возвращает количество элементов в
+            нем.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">CountElements([]int{1, 2, 3, 4, 5}) → 5
+CountElements([]int{}) → 0</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint3')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution3')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint3">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте встроенную функцию len()</p>
+                <p>• Она возвращает длину слайса</p>
+                <p>• Функция очень простая - всего одна строка</p>
+                <p>• Не нужно использовать циклы</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution3">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CountElements(numbers []int) int {
+    return len(numbers)
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 4: FindBigNumbers -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task4')">
+        <div class="task-title">FindBigNumbers - Поиск больших чисел</div>
+        <div class="task-number">4</div>
+    </div>
+    <div class="task-content" id="task4" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает слайс целых чисел и пороговое значение, возвращает новый
+            слайс с числами больше порога.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">FindBigNumbers([]int{1, 5, 10, 3, 8}, 4) → []int{5, 10, 8}</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint4')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution4')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint4">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте пустой слайс для результата</p>
+                <p>• Переберите каждый элемент исходного слайса</p>
+                <p>• Используйте условие if для сравнения с порогом</p>
+                <p>• Добавляйте элемент, только если он больше порога</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution4">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func FindBigNumbers(numbers []int, threshold int) []int {
+    var result []int
+    for _, num := range numbers {
+        if num > threshold {
+            result = append(result, num)
+        }
+    }
+    return result
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 5: CountPositive -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task5')">
+        <div class="task-title">CountPositive - Подсчет положительных чисел</div>
+        <div class="task-number">5</div>
+    </div>
+    <div class="task-content" id="task5" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает слайс целых чисел и возвращает количество положительных
+            чисел в нем.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">CountPositive([]int{1, -2, 3, -4, 5}) → 3</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint5')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution5')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint5">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте переменную счетчика, начинающуюся с 0</p>
+                <p>• Переберите каждый элемент слайса</p>
+                <p>• Проверьте, положительное ли число (больше 0)</p>
+                <p>• Увеличивайте счетчик для каждого положительного числа</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution5">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CountPositive(numbers []int) int {
+    count := 0
+    for _, num := range numbers {
+        if num > 0 {
+            count++
+        }
+    }
+    return count
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 6: IsEmpty -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task6')">
+        <div class="task-title">IsEmpty - Проверка на пустоту</div>
+        <div class="task-number">6</div>
+    </div>
+    <div class="task-content" id="task6" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает слайс целых чисел и возвращает true, если слайс пустой,
+            и
+            false в противном случае.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">IsEmpty([]int{}) → true
+IsEmpty([]int{1, 2, 3}) → false</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint6')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution6')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint6">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте функцию len() для получения длины слайса</p>
+                <p>• Слайс пустой, если его длина равна 0</p>
+                <p>• Сравните длину с 0 и верните результат</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution6">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func IsEmpty(numbers []int) bool {
+    return len(numbers) == 0
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 7: PrintRange -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task7')">
+        <div class="task-title">PrintRange - Вывод диапазона</div>
+        <div class="task-number">7</div>
+    </div>
+    <div class="task-content" id="task7" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает два числа (начало и конец) и выводит все числа в этом
+            диапазоне включительно.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">PrintRange(3, 7) → выводит: 3 4 5 6 7</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint7')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution7')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint7">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте цикл for от start до end включительно</p>
+                <p>• Выводите каждое число через fmt.Print</p>
+                <p>• Добавляйте пробел после каждого числа</p>
+                <p>• Не забудьте перевод строки в конце</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution7">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func PrintRange(start, end int) {
+    for i := start; i <= end; i++ {
+        fmt.Print(i, " ")
+    }
+    fmt.Println()
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 8: FindMinimum -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task8')">
+        <div class="task-title">FindMinimum - Поиск минимального элемента</div>
+        <div class="task-number">8</div>
+    </div>
+    <div class="task-content" id="task8" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает слайс целых чисел и возвращает минимальное значение.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">FindMinimum([]int{5, 2, 8, 1, 9}) → 1</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint8')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution8')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint8">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Проверьте, что слайс не пустой</p>
+                <p>• Используйте первый элемент как начальное минимальное значение</p>
+                <p>• Переберите остальные элементы и сравните с текущим минимумом</p>
+                <p>• Обновляйте минимум при нахождении меньшего значения</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution8">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func FindMinimum(numbers []int) int {
+    if len(numbers) == 0 {
+        return 0
+    }
+    min := numbers[0]
+    for _, num := range numbers {
+        if num < min {
+            min = num
+        }
+    }
+    return min
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 9: RepeatNumbers -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task9')">
+        <div class="task-title">RepeatNumbers - Повторение чисел</div>
+        <div class="task-number">9</div>
+    </div>
+    <div class="task-content" id="task9" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число N и выводит это число N раз.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">RepeatNumbers(3) → выводит: 3 3 3</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint9')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution9')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint9">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте цикл от 1 до N</p>
+                <p>• В каждой итерации выводите число N</p>
+                <p>• Добавляйте пробел после каждого числа</p>
+                <p>• Используйте fmt.Print для вывода без перевода строки</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution9">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func RepeatNumbers(n int) {
+    for i := 1; i <= n; i++ {
+        fmt.Print(n, " ")
+    }
+    fmt.Println()
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Task 10: SumRange -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('task10')">
+        <div class="task-title">SumRange - Сумма диапазона</div>
+        <div class="task-number">10</div>
+    </div>
+    <div class="task-content" id="task10" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает два числа (начало и конец диапазона) и возвращает сумму
+            всех
+            чисел в этом диапазоне включительно.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">SumRange(1, 5) → 15  // 1+2+3+4+5 = 15</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hint10')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solution10')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hint10">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте переменную для накопления суммы</p>
+                <p>• Используйте цикл от start до end включительно</p>
+                <p>• Добавляйте каждое число к общей сумме</p>
+                <p>• Верните итоговую сумму</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solution10">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func SumRange(start, end int) int {
+    sum := 0
+    for i := start; i <= end; i++ {
+        sum += i
+    }
+    return sum
+}</code></pre>
+        </div>
+    </div>
+</div>

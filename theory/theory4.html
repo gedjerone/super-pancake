@@ -1,0 +1,400 @@
+<!-- Теория: Функции -->
+<div class="theory-section">
+    <div class="theory-header" onclick="toggleTheory('functions')">
+        <div class="theory-title">🔧 Функции</div>
+        <div class="theory-icon">FUNC</div>
+    </div>
+    <div class="theory-content" id="functions" style="display: none;">
+        <div class="theory-subsection">
+            <h3>Основы функций в Go</h3>
+            <p>Функции - это основные строительные блоки любой
+                программы
+                на
+                Go. Они позволяют группировать код в
+                переиспользуемые
+                модули.</p>
+
+            <h4>📋 Базовый синтаксис</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">func functionName(parameter1 type1, parameter2 type2) returnType {
+    // тело функции
+    return value
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Функции без параметров и возвращаемых значений</h3>
+            <p>Простейший тип функций - выполняют действие, но
+                ничего не
+                принимают и не возвращают.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">func sayHello() {
+    fmt.Println("Привет, мир!")
+}
+
+func printBanner() {
+    fmt.Println("====================")
+    fmt.Println("Добро пожаловать!")
+    fmt.Println("====================")
+}
+
+func clearScreen() {
+    fmt.Print("\033[H\033[2J") // очистка экрана в терминале
+}
+
+// Вызов функций
+func main() {
+    sayHello()
+    printBanner()
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Функции с параметрами</h3>
+            <p>Параметры позволяют передавать данные в функцию для
+                обработки.</p>
+
+            <h4>🔢 Функции с одним параметром</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">func greet(name string) {
+    fmt.Printf("Привет, %s!\n", name)
+}
+
+func square(x int) {
+    result := x * x
+    fmt.Printf("Квадрат %d равен %d\n", x, result)
+}
+
+func printTimes(message string, count int) {
+    for i := 0; i < count; i++ {
+        fmt.Println(message)
+    }
+}</code></pre>
+            </div>
+
+            <h4>📝 Функции с несколькими параметрами</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">func introduce(firstName, lastName string, age int) {
+    fmt.Printf("Меня зовут %s %s, мне %d лет\n", firstName, lastName, age)
+}
+
+func calculateRectangle(width, height float64) {
+    area := width * height
+    perimeter := 2 * (width + height)
+    fmt.Printf("Прямоугольник %vx%v: площадь=%v, периметр=%v\n", width, height, area, perimeter)
+}
+
+// Параметры одинакового типа можно объединять
+func add(a, b, c int) {
+    sum := a + b + c
+    fmt.Printf("%d + %d + %d = %d\n", a, b, c, sum)
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Функции с возвращаемыми значениями</h3>
+            <p>Функции могут возвращать результат вычислений для
+                дальнейшего использования.</p>
+
+            <h4>🔄 Функции с одним возвращаемым значением</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">func add(a, b int) int {
+    return a + b
+}
+
+func multiply(x, y float64) float64 {
+    return x * y
+}
+
+func isEven(number int) bool {
+    return number%2 == 0
+}
+
+func getName() string {
+    return "Анна"
+}
+
+// Использование
+func main() {
+    sum := add(5, 3) // sum = 8
+    product := multiply(2.5, 4.0) // product = 10.0
+    even := isEven(42) // even = true
+    name := getName() // name = "Анна"
+}</code></pre>
+            </div>
+
+            <h4>📊 Функции с несколькими возвращаемыми
+                значениями
+            </h4>
+            <div class="theory-code">
+                <pre><code class="language-go">func divmod(a, b int) (int, int) {
+    quotient := a / b
+    remainder := a % b
+    return quotient, remainder
+}
+
+func getPersonInfo() (string, int, bool) {
+    return "Алиса", 25, true
+}
+
+func minMax(numbers []int) (int, int) {
+    if len(numbers) == 0 {
+        return 0, 0
+    }
+
+    min, max := numbers[0], numbers[0]
+    for _, num := range numbers {
+        if num < min { min=num } if num> max {
+            max = num
+        }
+    }
+    return min, max
+}
+
+// Использование
+func main() {
+    quot, rem := divmod(17, 5) // quot = 3, rem = 2
+    name, age, isActive := getPersonInfo()
+    minimum, maximum := minMax([]int{3, 1, 4, 1, 5, 9})
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Именованные возвращаемые значения</h3>
+            <p>Go позволяет давать имена возвращаемым значениям,
+                что
+                делает код более читаемым.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">func calculateCircle(radius float64) (area, circumference float64) {
+    area = math.Pi * radius * radius
+    circumference = 2 * math.Pi * radius
+    return // автоматически возвращает area и circumference
+}
+
+func analyzeGrades(scores []int) (average float64, highest, lowest int) {
+    if len(scores) == 0 {
+        return 0, 0, 0
+    }
+
+    sum := 0
+    highest = scores[0]
+    lowest = scores[0]
+
+    for _, score := range scores {
+        sum += score
+        if score > highest {
+            highest = score
+        }
+        if score < lowest {
+            lowest = score
+        }
+    }
+    average = float64(sum) / float64(len(scores))
+    return // возвращает average, highest, lowest
+}
+func validatePassword(password string) (isValid bool, message string) {
+    if len(password) < 8 {
+        isValid = false
+        message = "Пароль должен содержать минимум 8 символов"
+        return
+    }
+    if len(password) > 50 {
+        isValid = false
+        message = "Пароль слишком длинный"
+        return
+    }
+
+    isValid = true
+    message = "Пароль корректен"
+    return
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Вариативные функции (Variadic Functions)</h3>
+            <p>Функции, которые могут принимать переменное
+                количество
+                аргументов.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">func sum(numbers ...int) int {
+    total := 0
+    for _, num := range numbers {
+        total += num
+    }
+    return total
+}
+
+func findMax(first int, rest ...int) int {
+    max := first
+    for _, num := range rest {
+        if num > max {
+            max = num
+        }
+    }
+    return max
+}
+
+func concatenate(separator string, words ...string) string {
+    result := ""
+    for i, word := range words {
+        if i > 0 {
+            result += separator
+        }
+        result += word
+    }
+    return result
+}
+
+// Использование
+func main() {
+    total1 := sum(1, 2, 3) // total1 = 6
+    total2 := sum(1, 2, 3, 4, 5, 6) // total2 = 21
+    total3 := sum() // total3 = 0
+
+    max := findMax(5, 2, 8, 1, 9, 3) // max = 9
+
+    text := concatenate(" ", "Hello", "beautiful", "world")
+    // "Hello beautiful world"
+
+    // Передача слайса в вариативную функцию
+    numbers := []int{10, 20, 30}
+    result := sum(numbers...) // распаковка слайса
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Обработка ошибок в функциях</h3>
+            <p>В Go принято возвращать ошибку как последнее
+                значение
+                из
+                функции.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">import "errors"
+
+func divide(a, b float64) (float64, error) {
+    if b == 0 {
+        return 0, errors.New("деление на ноль невозможно")
+    }
+    return a / b, nil
+}
+
+func sqrt(x float64) (float64, error) {
+    if x < 0 {
+        return 0, errors.New("квадратный корень из отрицательного числа")
+    }
+    return math.Sqrt(x), nil
+}
+
+func validateAge(age int) error {
+    if age < 0 {
+        return errors.New("возраст не может быть отрицательным")
+    }
+    if age > 150 {
+        return errors.New("возраст не может быть больше 150")
+    }
+    return nil
+}
+
+// Использование
+func main() {
+    result, err := divide(10, 3)
+    if err != nil {
+        fmt.Printf("Ошибка: %v\n", err)
+        return
+    }
+    fmt.Printf("Результат: %v\n", result)
+
+    if err := validateAge(25); err != nil {
+        fmt.Printf("Ошибка валидации: %v\n", err)
+    } else {
+        fmt.Println("Возраст корректен")
+    }
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Лучшие практики для функций</h3>
+
+            <h4>✅ Хорошие практики</h4>
+            <ul class="theory-list">
+                <li>Делайте функции короткими и фокусированными
+                    на
+                    одной
+                    задаче</li>
+                <li>Используйте понятные и описательные имена
+                </li>
+                <li>Ограничивайте количество параметров
+                    (рекомендуется
+                    не более 5)</li>
+                <li>Возвращайте ошибки как последнее значение
+                </li>
+                <li>Используйте именованные возвращаемые
+                    значения
+                    для
+                    сложных функций</li>
+                <li>Документируйте функции комментариями</li>
+            </ul>
+
+            <h4>🎯 Принципы хороших функций</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Хорошо: функция делает одну вещь
+func calculateTax(income float64) float64 {
+    return income * 0.13
+}
+
+func formatCurrency(amount float64) string {
+    return fmt.Sprintf("%.2f руб.", amount)
+}
+
+// Плохо: функция делает слишком много
+func processPayment(income float64) string {
+    tax := income * 0.13
+    netIncome := income - tax
+    return fmt.Sprintf("Доход: %.2f руб., Налог: %.2f руб., К выплате: %.2f руб.", income, tax, netIncome)
+}
+
+// Лучше разбить на несколько функций
+func calculateNetIncome(income float64) (netIncome, tax float64) {
+    tax = calculateTax(income)
+    netIncome = income - tax
+    return
+}
+
+func formatPaymentReport(income, tax, netIncome float64) string {
+    return fmt.Sprintf(
+        "Доход: %s, Налог: %s, К выплате: %s",
+        formatCurrency(income),
+        formatCurrency(tax),
+        formatCurrency(netIncome)
+    )
+}</code></pre>
+            </div>
+
+            <h4>📋 Соглашения по именованию</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Хорошие имена функций
+func calculateTotal(items []Item) float64 { }
+func validateEmail(email string) bool { }
+func processPayment(amount float64) error { }
+func getUserByID(id int) (User, error) { }
+
+// Плохие имена функций
+func calc(items []Item) float64 { } // слишком сокращенно
+func check(email string) bool { } // неясно что проверяем
+func process(amount float64) error { } // неясно что обрабатываем
+func get(id int) (User, error) { } // неясно что получаем</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест квизов</title>
+    <link rel="stylesheet" href="styles/maps-tasks.css">
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h2>Тест функции checkMapQuiz</h2>
+
+        <div class="quiz-options">
+            <label class="quiz-option">
+                <input type="radio" name="testQuiz" value="wrong1">
+                <span>Неправильный ответ 1</span>
+            </label>
+            <label class="quiz-option">
+                <input type="radio" name="testQuiz" value="correct">
+                <span>Правильный ответ</span>
+            </label>
+            <label class="quiz-option">
+                <input type="radio" name="testQuiz" value="wrong2">
+                <span>Неправильный ответ 2</span>
+            </label>
+        </div>
+
+        <button class="quiz-button" onclick="checkMapQuiz('testQuiz', 'correct', 'Отлично! Это правильный ответ!')">
+            ✅ Проверить ответ
+        </button>
+
+        <div class="quiz-result" id="result-testQuiz"></div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+
+    <script>
+        // Проверяем, доступна ли функция
+        console.log('checkMapQuiz доступна:', typeof checkMapQuiz);
+        console.log('window.checkMapQuiz доступна:', typeof window.checkMapQuiz);
+    </script>
+</body>
+
+</html>

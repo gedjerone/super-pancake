@@ -1,0 +1,391 @@
+<!-- Теория: Условные конструкции -->
+<div class="theory-section">
+    <div class="theory-header" onclick="toggleTheory('conditions')">
+        <div class="theory-title">🔀 Условные конструкции</div>
+        <div class="theory-icon">IF</div>
+    </div>
+    <div class="theory-content" id="conditions" style="display: none;">
+        <div class="theory-subsection">
+            <h3>Простое условие if</h3>
+            <p>Базовая конструкция для выполнения кода при определенном условии.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">if condition {
+    // выполняется, если condition == true
+}</code></pre>
+            </div>
+
+            <h4>📋 Примеры использования</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">age := 18
+
+if age >= 18 {
+    fmt.Println("Вы совершеннолетний")
+}
+
+// Можно без фигурных скобок только для одного утверждения
+if age >= 21 {
+    fmt.Println("Можно употреблять алкоголь в США")
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Условие if-else</h3>
+            <p>Выполнение альтернативного кода, если условие не выполняется.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">if condition {
+    // выполняется, если condition == true
+} else {
+    // выполняется, если condition == false
+}</code></pre>
+            </div>div>
+
+            <h4>📋 Практические примеры</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">score := 85
+
+if score >= 80 {
+    fmt.Println("Отличная оценка!")
+} else {
+    fmt.Println("Нужно подтянуть знания")
+}
+
+// Проверка четности числа
+number := 42
+if number%2 == 0 {
+    fmt.Println("Четное число")
+} else {
+    fmt.Println("Нечетное число")
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Множественные условия if-else if-else</h3>
+            <p>Проверка нескольких условий последовательно.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">if condition1 {
+    // выполняется, если condition1 == true
+} else if condition2 {
+    // выполняется, если condition1 == false и condition2 == true
+} else if condition3 {
+    // выполняется, если предыдущие условия false и condition3 == true
+} else {
+    // выполняется, если все условия false
+}</pre></code>
+            </div>
+
+            <h4>📊 Система оценок</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">score := 75
+
+if score >= 90 {
+    fmt.Println("Оценка: A (Отлично)")
+} else if score >= 80 {
+    fmt.Println("Оценка: B (Хорошо)")
+} else if score >= 70 {
+    fmt.Println("Оценка: C (Удовлетворительно)")
+} else if score >= 60 {
+    fmt.Println("Оценка: D (Неудовлетворительно)")
+} else {
+    fmt.Println("Оценка: F (Провал)")
+}</pre></code>
+            </div>
+
+            <h4>🌡️ Классификация температуры</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">temperature := 25
+
+if temperature > 30 {
+    fmt.Println("Жарко! Включите кондиционер")
+} else if temperature > 20 {
+    fmt.Println("Комфортная температура")
+} else if temperature > 10 {
+    fmt.Println("Прохладно, оденьтесь теплее")
+} else if temperature > 0 {
+    fmt.Println("Холодно!")
+} else {
+    fmt.Println("Замерзнет даже вода!")
+}</pre></code>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Операторы сравнения</h3>
+            <p>Операторы, которые возвращают булево значение (true/false).</p>
+
+            <h4>🔍 Основные операторы</h4>
+            <ul class="theory-list">
+                <li><span class="highlight">==</span> - равно</li>
+                <li><span class="highlight">!=</span> - не равно</li>
+                <li><span class="highlight">&lt;</span> - меньше</li>
+                <li><span class="highlight">&gt;</span> - больше</li>
+                <li><span class="highlight">&lt;=</span> - меньше или равно</li>
+                <li><span class="highlight">&gt;=</span> - больше или равно</li>
+            </ul>
+
+            <div class="theory-code">
+                <pre><code class="language-go">a, b := 10, 20
+
+fmt.Println(a == b) // false
+fmt.Println(a != b) // true
+fmt.Println(a < b) // true fmt.Println(a> b) // false
+fmt.Println(a <= 10) // true fmt.Println(b>= 20) // true</pre></code>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Логические операторы</h3>
+            <p>Операторы для комбинирования нескольких условий.</p>
+
+            <h4>🔗 Основные логические операторы</h4>
+            <ul class="theory-list">
+                <li><span class="highlight">&&</span> - логическое И (AND) - все условия должны быть true
+                </li>
+                <li><span class="highlight">||</span> - логическое ИЛИ (OR) - хотя бы одно условие должно
+                    быть
+                    true
+                </li>
+                <li><span class="highlight">!</span> - логическое НЕ (NOT) - инвертирует значение</li>
+            </ul>
+
+            <h4>💡 Примеры с логическим И (&&)</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">age := 25
+hasLicense := true
+
+// Оба условия должны быть true
+if age >= 18 && hasLicense {
+    fmt.Println("Можете водить машину")
+}
+
+// Проверка диапазона
+score := 85
+if score >= 70 && score <= 100 {
+    fmt.Println("Проходной балл")
+}</code></pre>
+            </div>
+
+            <h4>🔄 Примеры с логическим ИЛИ (||)</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">day := "суббота"
+
+// Хотя бы одно условие должно быть true
+if day == "суббота" || day == "воскресенье" {
+    fmt.Println("Выходной день!")
+}
+
+// Проверка нескольких значений
+grade := "A"
+if grade == "A" || grade == "B" || grade == "C" {
+    fmt.Println("Проходная оценка")
+}</code></pre>
+            </div>
+
+            <h4>❗ Примеры с логическим НЕ (!)</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">isRaining := false
+
+if !isRaining {
+    fmt.Println("Можно идти гулять")
+}
+
+// Проверка что число НЕ равно нулю
+number := 42
+if number != 0 { // или !number == 0
+    fmt.Println("Число не равно нулю")
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Сложные условия - комбинирование операторов</h3>
+
+            <h4>🧠 Комплексные логические выражения</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">age := 25
+income := 50000
+creditScore := 750
+hasJob := true
+
+// Комплексная проверка для кредита
+if (age >= 21 && age <= 65) && (income>= 30000 || hasJob) &&
+    creditScore >= 700 {
+    fmt.Println("Кредит одобрен!")
+} else {
+    fmt.Println("Кредит отклонен")
+}</code></pre>
+            </div>
+
+            <h4>🎯 Группировка условий с помощью скобок</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Без скобок (может быть неясно)
+if a && b || c && d {
+    // ...
+}
+
+// Со скобками (ясно)
+if (a && b) || (c && d) {
+    // ...
+}
+
+// Практический пример
+weather := "солнечно"
+temperature := 22
+hasUmbrella := true
+
+if (weather == "солнечно" && temperature > 20) || (weather == "дождь" && hasUmbrella) {
+    fmt.Println("Хороший день для прогулки")
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Условие с инициализацией</h3>
+            <p>Go позволяет объявить переменную прямо в условии if.</p>
+
+            <div class="theory-code">
+                <pre><code class="language-go">// Синтаксис
+if initialization; condition {
+    // код
+}</code></pre>
+            </div>
+
+            <h4>📋 Практические примеры</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Проверка результата функции
+if result := calculate(10, 20); result > 0 {
+    fmt.Println("Результат положительный:", result)
+}
+
+// Проверка длины строки
+if length := len("Hello"); length > 3 {
+    fmt.Println("Строка достаточно длинная")
+}
+
+// Работа с мапами
+users := map[string]int{"alice": 25, "bob": 30}
+if age, exists := users["alice"]; exists {
+    fmt.Printf("Возраст Alice: %d\n", age)
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Switch - альтернатива множественным if</h3>
+            <p>Switch обеспечивает более чистый способ проверки множественных значений.</p>
+
+            <h4>🎯 Базовый switch</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">day := "понедельник"
+
+switch day {
+case "понедельник":
+    fmt.Println("Начало рабочей недели")
+case "пятница":
+    fmt.Println("Конец рабочей недели")
+case "суббота", "воскресенье":
+    fmt.Println("Выходной!")
+default:
+    fmt.Println("Обычный рабочий день")
+}</code></pre>
+            </div>
+
+            <h4>🔢 Switch с числами</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">grade := 85
+
+switch {
+case grade >= 90:
+    fmt.Println("A")
+case grade >= 80:
+    fmt.Println("B")
+case grade >= 70:
+    fmt.Println("C")
+case grade >= 60:
+    fmt.Println("D")
+default:
+    fmt.Println("F")
+}</code></pre>
+            </div>
+
+            <h4>⚡ Switch с инициализацией</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">switch time := getTime(); {
+case time < 12:
+    fmt.Println("Доброе утро!")
+case time < 18:
+    fmt.Println("Добрый день!")
+default:
+    fmt.Println("Добрый вечер!")
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Лучшие практики для условий</h3>
+
+            <h4>✅ Хорошие практики</h4>
+            <ul class="theory-list">
+                <li>Используйте понятные имена переменных</li>
+                <li>Избегайте слишком глубокой вложенности</li>
+                <li>Группируйте связанные условия</li>
+                <li>Используйте switch для множественных проверок значений</li>
+                <li>Добавляйте комментарии для сложных условий</li>
+            </ul>
+
+            <h4>❌ Плохие практики</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Плохо: слишком сложное условие
+if ((a > 0 && b < 10) || (c == 5 && d != 3)) && (e > f || g <= h) {
+    // сложно понять
+}
+// Хорошо: разбиваем на части
+isValidRange := (a > 0 && b < 10) || (c == 5 && d != 3)
+isCorrectOrder := e > f || g <= h
+if isValidRange && isCorrectOrder {
+    // легко понять
+}</code></pre>
+            </div>
+
+            <h4>🎯 Принцип раннего возврата</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Плохо: глубокая вложенность
+func validateUser(age int, hasLicense bool) {
+    if age >= 18 {
+        if hasLicense {
+            if creditScore > 600 {
+                fmt.Println("Пользователь подтвержден")
+            } else {
+                fmt.Println("Низкий кредитный рейтинг")
+            }
+        } else {
+            fmt.Println("Нет лицензии")
+        }
+    } else {
+        fmt.Println("Слишком молодой")
+    }
+}
+
+// Хорошо: ранний возврат
+func validateUser(age int, hasLicense bool) {
+    if age < 18 {
+        fmt.Println("Слишком молодой")
+        return
+    }
+    if !hasLicense {
+        fmt.Println("Нет лицензии")
+        return
+    } if creditScore <=600 {
+        fmt.Println("Низкий кредитный рейтинг")
+        return
+    }
+    fmt.Println("Пользователь подтвержден")
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

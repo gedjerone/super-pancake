@@ -1,0 +1,622 @@
+<!-- Теория: Мапы -->
+<div class="theory-section">
+    <div class="theory-header" onclick="toggleTheory('maps')">
+        <div class="theory-title">🗺️ Мапы (Maps)
+        </div>
+        <div class="theory-icon">MAP</div>
+    </div>
+    <div class="theory-content" id="maps" style="display: none;">
+        <div class="theory-subsection">
+            <h3>Что такое мапа? - глубокое понимание
+            </h3>
+            <p>Мапа (map) - это встроенный
+                ассоциативный
+                тип
+                данных в Go, который хранит пары
+                ключ-значение. Мапы реализованы как
+                хеш-таблицы и обеспечивают быстрый
+                доступ к
+                данным.</p>
+
+            <h4>🔑 Ключевые особенности мап</h4>
+            <ul class="theory-list">
+                <li>Неупорядоченная коллекция
+                    (порядок
+                    элементов не гарантируется)</li>
+                <li>Быстрый поиск: O(1) в среднем
+                    случае
+                </li>
+                <li>Ключи должны быть сравнимыми
+                    (comparable) типами</li>
+                <li>Значения могут быть любого типа
+                </li>
+                <li>Ссылочный тип (reference type)
+                </li>
+                <li>Нулевое значение: nil</li>
+            </ul>
+
+            <div class="theory-code">
+                <pre><code class="language-go">// Базовый синтаксис
+var m map[KeyType]ValueType
+
+// Пример
+ages := map[string]int{
+    "Алиса": 25,
+    "Боб": 30,
+    "Карл": 35,
+}
+fmt.Printf("Количество элементов: %d\n", len(ages))</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Способы создания мап</h3>
+
+            <h4>🏭 Способ 1: Функция make</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Создание пустой мапы
+ages := make(map[string]int)
+
+// Добавление элементов
+ages["Алиса"] = 25
+ages["Боб"] = 30
+ages["Карл"] = 35
+
+// С предварительным размером (оптимизация)
+scores := make(map[string]int, 100) // ожидаем ~100 элементов</code></pre>
+            </div>
+
+            <h4>🎯 Способ 2: Литерал мапы</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Инициализация с данными
+grades := map[string]string{
+    "математика": "A",
+    "физика":     "B",
+    "химия":      "A",
+    "история":    "C",
+}
+
+// Пустая мапа через литерал
+empty := map[string]int{}
+
+// Сложные типы как значения
+students := map[string][]string{
+    "группа1": {"Алиса", "Боб"},
+    "группа2": {"Карл", "Дэйв"},
+    "группа3": {"Ева", "Фрэнк"},
+}</code></pre>
+            </div>
+
+            <h4>⚠️ Нулевая мапа vs пустая мапа</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Нулевая мапа (nil map)
+var nilMap map[string]int
+fmt.Println(nilMap == nil) // true
+fmt.Println(len(nilMap))   // 0
+// nilMap["key"] = 1        // PANIC! нельзя записывать в nil map
+
+// Пустая мапа
+emptyMap := make(map[string]int)
+fmt.Println(emptyMap == nil) // false
+fmt.Println(len(emptyMap))   // 0
+emptyMap["key"] = 1          // OK! можно записывать
+
+// Проверка на nil
+if nilMap == nil {
+    nilMap = make(map[string]int) // инициализация
+}
+nilMap["key"] = 1 // теперь безопасно</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Операции с мапами - подробное
+                руководство
+            </h3>
+
+            <h4>➕ Добавление и изменение элементов
+            </h4>
+            <div class="theory-code">
+                <pre><code class="language-go">ages := make(map[string]int)
+
+// Добавление новых элементов
+ages["Алиса"] = 25
+ages["Боб"] = 30
+
+// Изменение существующих элементов
+ages["Алиса"] = 26 // Алиса стала на год старше
+
+// Инкремент значения
+ages["Боб"]++ // Боб тоже постарел
+
+// Условное добавление (если ключа нет)
+if _, exists := ages["Карл"]; !exists {
+    ages["Карл"] = 35
+}
+
+fmt.Println(ages) // map[Алиса:26 Боб:31 Карл:35]</code></pre>
+            </div>
+
+            <h4>🔍 Получение значений</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">ages := map[string]int{
+    "Алиса": 25,
+    "Боб":   30,
+    "Карл":  35,
+}
+
+// Простое получение (может вернуть нулевое значение)
+age := ages["Алиса"]      // 25
+unknownAge := ages["Неизвестный"] // 0 (нулевое значение для int)
+
+// Безопасное получение с проверкой существования
+age, exists := ages["Алиса"]
+if exists {
+    fmt.Printf("Алисе %d лет\n", age)
+} else {
+    fmt.Println("Алиса не найдена")
+}
+
+// Краткая проверка существования
+if age, ok := ages["Дэйв"]; ok {
+    fmt.Printf("Дэйву %d лет\n", age)
+} else {
+    fmt.Println("Дэйв не найден")
+}</code></pre>
+            </div>
+
+            <h4>🗑️ Удаление элементов</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">ages := map[string]int{
+    "Алиса": 25,
+    "Боб":   30,
+    "Карл":  35,
+    "Дэйв":  28,
+}
+
+// Удаление по ключу
+delete(ages, "Боб")
+fmt.Println(ages) // map[Алиса:25 Карл:35 Дэйв:28]
+
+// Удаление несуществующего ключа (безопасно)
+delete(ages, "Неизвестный") // ничего не происходит
+
+// Очистка всей мапы
+for key := range ages {
+    delete(ages, key)
+}
+fmt.Println(len(ages)) // 0
+
+// Более эффективная очистка
+ages = make(map[string]int) // создаем новую пустую мапу</code></pre>
+            </div>
+
+            <h4>🔄 Перебор элементов</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">grades := map[string]string{
+    "математика": "A",
+    "физика":     "B",
+    "химия":      "A",
+    "история":    "C",
+}
+
+// Перебор ключей и значений
+for subject, grade := range grades {
+    fmt.Printf("%s: %s\n", subject, grade)
+}
+
+// Только ключи
+for subject := range grades {
+    fmt.Printf("Изучаем: %s\n", subject)
+}
+
+// Только значения
+for _, grade := range grades {
+    fmt.Printf("Оценка: %s\n", grade)
+}
+
+// Собираем все ключи в слайс
+var subjects []string
+for subject := range grades {
+    subjects = append(subjects, subject)
+}
+
+// Собираем все значения в слайс
+var gradeValues []string
+for _, grade := range grades {
+    gradeValues = append(gradeValues, grade)
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Продвинутые техники работы с мапами
+            </h3>
+
+            <h4>📊 Подсчет и группировка</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Подсчет частоты символов в строке
+func countCharacters(text string) map[rune]int {
+    counts := make(map[rune]int)
+    for _, char := range text {
+        counts[char]++
+    }
+    return counts
+}
+
+// Группировка слов по длине
+func groupWordsByLength(words []string) map[int][]string {
+    groups := make(map[int][]string)
+    for _, word := range words {
+        length := len(word)
+        groups[length] = append(groups[length], word)
+    }
+    return groups
+}
+
+// Использование
+text := "hello world"
+charCounts := countCharacters(text)
+fmt.Println(charCounts) // map[32:1 100:1 101:1 104:1 108:3 111:2 114:1 119:1]
+
+words := []string{"go", "is", "fun", "programming", "language"}
+grouped := groupWordsByLength(words)
+fmt.Println(grouped) // map[2:[go is] 3:[fun] 8:[language] 11:[programming]]
+                            </code></pre>
+            </div>
+
+            <h4>🔄 Инвертирование мап</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Инвертирование мапы (ключи становятся значениями)
+func invertMap(original map[string]int) map[int]string {
+    inverted := make(map[int]string)
+    for key, value := range original {
+        inverted[value] = key
+    }
+    return inverted
+}
+
+// Инвертирование с учетом дубликатов значений
+func invertMapSafe(original map[string]int) map[int][]string {
+    inverted := make(map[int][]string)
+    for key, value := range original {
+        inverted[value] = append(inverted[value], key)
+    }
+    return inverted
+}
+
+// Использование
+ages := map[string]int{
+    "Алиса": 25,
+    "Боб": 30,
+    "Карл": 25
+}
+inverted := invertMapSafe(ages)
+fmt.Println(inverted) // map[25:[Алиса Карл] 30:[Боб]]</code></pre>
+            </div>
+
+            <h4>🔍 Поиск и фильтрация</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Поиск ключей по значению
+func findKeysByValue(m map[string]int, value int) []string {
+    var keys []string
+    for key, val := range m {
+        if val == value {
+            keys = append(keys, key)
+        }
+    }
+    return keys
+}
+
+// Фильтрация мапы по условию
+func filterMap(m map[string]int, predicate func(string, int) bool)
+    map[string]int {
+    result := make(map[string]int)
+    for key, value := range m {
+        if predicate(key, value) {
+            result[key] = value
+        }
+    }
+    return result
+}
+
+// Использование
+ages := map[string]int{
+    "Алиса": 25,
+    "Боб": 30,
+    "Карл": 25,
+    "Дэйв": 35
+}
+
+// Найти всех 25-летних
+young := findKeysByValue(ages, 25)
+fmt.Println(young) // [Алиса Карл]
+
+// Фильтр: возраст > 25
+adults := filterMap(ages, func(name string, age int) bool {
+    return age > 25
+})
+fmt.Println(adults) // map[Боб:30 Дэйв:35]
+                            </code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Мапы с составными типами</h3>
+
+            <h4>🏗️ Структуры как значения</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">type Person struct {
+    Name string
+    Age int
+    City string
+}
+
+// Мапа со структурами как значениями
+people := map[string]Person{
+    "p1": {
+        Name: "Алиса",
+        Age: 25,
+        City: "Москва"
+    },
+    "p2": {
+        Name: "Боб",
+        Age: 30,
+        City: "СПБ"
+    },
+    "p3": {
+        Name: "Карл",
+        Age: 35,
+        City: "Казань"
+    },
+}
+
+// Изменение поля структуры
+person := people["p1"]
+person.Age = 26
+people["p1"] = person // нужно переприсвоить всю структуру
+
+// Или используйте указатели для прямого изменения
+peoplePtr := map[string]*Person{
+    "p1": &Person{
+        Name: "Алиса",
+        Age: 25,
+        City: "Москва"
+    },
+    "p2": &Person{
+        Name: "Боб",
+        Age: 30,
+        City: "СПБ"
+    },
+}
+
+peoplePtr["p1"].Age = 26 // прямое изменение через указатель
+</code></div>
+
+                            <h4>📋 Слайсы как значения</h4>
+                            <div class="theory-code"><pre><code class="language-go">// Мапа со слайсами как значениями
+groups := map[string][]string{
+    "разработчики": {"Алиса", "Боб"},
+    "дизайнеры": {"Карл", "Дэйв"},
+    "менеджеры": {"Ева"},
+}
+
+// Добавление элемента в слайс
+groups["разработчики"] = append(groups["разработчики"], "Фрэнк")
+
+// Инициализация пустого слайса при первом добавлении
+func addToGroup(groups map[string][]string, group, person string) {
+    if groups[group] == nil {
+        groups[group] = make([]string, 0)
+    }
+    groups[group] = append(groups[group], person)
+}
+
+// Использование
+addToGroup(groups, "тестировщики", "Грейс")
+fmt.Println(groups["тестировщики"]) // [Грейс]</code></pre>
+            </div>
+
+            <h4>🗺️ Вложенные мапы</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Двумерная мапа
+matrix := map[string]map[string]int{
+    "строка1": {
+        "кол1": 1,
+        "кол2": 2,
+        "кол3": 3
+    },
+    "строка2": {
+        "кол1": 4,
+        "кол2": 5,
+        "кол3": 6
+    },
+}
+
+// Безопасный доступ к вложенной мапе
+func getValue(matrix map[string]map[string]int, row, col string) (int, bool) {
+    if rowMap, rowExists := matrix[row]; rowExists {
+        if value, colExists := rowMap[col]; colExists {
+            return value, true
+        }
+    }
+    return 0, false
+}
+
+// Безопасное присваивание в вложенную мапу
+func setValue(matrix map[string]map[string]int, row, col string, value int) {
+    if matrix[row] == nil {
+        matrix[row] = make(map[string]int)
+    }
+    matrix[row][col] = value
+}
+
+// Использование
+setValue(matrix, "строка3", "кол1", 7)
+if value, ok := getValue(matrix, "строка3", "кол1"); ok {
+    fmt.Printf("Значение: %d\n", value) // Значение: 7
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Производительность и оптимизация
+            </h3>
+
+            <h4>⚡ Советы по производительности</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Предварительное выделение памяти для больших мап
+largeMap := make(map[string]int, 10000)
+// ожидаем 10k элементов
+
+// Измерение времени выполнения операций
+start := time.Now()
+for i := 0; i < 100000; i++ {
+    largeMap[fmt.Sprintf("key%d", i)] = i
+}
+fmt.Printf("Вставка заняла: %v\n", time.Since(start))
+// Более эффективная проверка существования ключа
+if _, exists := myMap[key]; exists {
+    // ключ существует
+} else {
+    // ключ не существует
+}
+// Вместо двойного поиска
+if _, exists := myMap[key]; exists {
+    value := myMap[key] // второй поиск! // используем value
+}
+// Лучше: одноразовый поиск
+if value, exists := myMap[key]; exists {
+    // используем value
+}</code></pre>
+            </div>
+
+            <h4>🧠 Управление памятью</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// Очистка большой мапы для освобождения памяти
+func clearLargeMap(m map[string]LargeStruct) {
+    // Простое присваивание nil
+    m = nil // не освобождает память underlying hash table
+
+    // Правильная очистка: удаляем все элементы
+    for key := range m {
+        delete(m, key)
+    }
+
+    // Или создаем новую мапу
+    m = make(map[string]LargeStruct)
+}
+
+// Копирование мапы (shallow copy)
+func copyMap(original map[string]int) map[string]int {
+    copy := make(map[string]int,
+    len(original))
+    for key, value := range original {
+        copy[key] = value
+    }
+    return copy
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="theory-subsection">
+            <h3>Лучшие практики для мап</h3>
+
+            <h4>✅ Рекомендации</h4>
+            <ul class="theory-list">
+                <li>Всегда проверяйте
+                    существование
+                    ключа при получении значения
+                </li>
+                <li>Инициализируйте мапы перед
+                    использованием (избегайте
+                    nil
+                    maps)
+                </li>
+                <li>Используйте предварительное
+                    выделение памяти для больших
+                    мап
+                </li>
+                <li>Помните, что мапы
+                    неупорядочены
+                    - не
+                    полагайтесь на порядок
+                    элементов
+                </li>
+                <li>Используйте осмысленные типы
+                    ключей
+                </li>
+                <li>Рассмотрите использование
+                    sync.Map
+                    для конкурентного доступа
+                </li>
+            </ul>
+
+            <h4>⚠️ Частые ошибки</h4>
+            <div class="theory-code">
+                <pre><code class="language-go">// ОШИБКА: запись в nil map
+var m map[string]int
+// m["key"] = 1 - PANIC!
+
+// ПРАВИЛЬНО: инициализация перед использованием
+m = make(map[string]int)
+m["key"] = 1 // OK
+
+// ОШИБКА: предположение о порядке элементов
+for key := range myMap {
+    // Порядок не гарантируется!
+}
+
+// ОШИБКА: изменение мапы во время итерации
+for key := range myMap {
+    if someCondition {
+        delete(myMap, key) // может пропустить элементы
+    }
+}
+
+// ПРАВИЛЬНО: сбор ключей для удаления
+var toDelete []string
+    for key := range myMap {
+    if someCondition {
+        toDelete = append(toDelete, key)
+    }
+}
+for _, key := range toDelete {
+    delete(myMap, key)
+}</code></pre>
+            </div>
+
+            <h4>🎯 Когда использовать мапы</h4>
+            <ul class="theory-list">
+                <li>Быстрый поиск элементов по
+                    ключу
+                </li>
+                <li>Подсчет частоты элементов
+                </li>
+                <li>Группировка данных</li>
+                <li>Кэширование результатов
+                    вычислений
+                </li>
+                <li>Реализация множеств (set) -
+                    map[T]bool</li>
+                <li>Индексирование данных</li>
+            </ul>
+
+            <h4>🚫 Когда НЕ использовать мапы
+            </h4>
+            <ul class="theory-list">
+                <li>Когда важен порядок
+                    элементов -
+                    используйте слайсы</li>
+                <li>Для небольших коллекций (<10 элементов) - слайс может быть быстрее</li>
+                <li>Когда нужна сортировка -
+                    используйте
+                    слайсы + sort</li>
+                <li>Для конкурентного доступа -
+                    используйте sync.Map или
+                    мьютексы
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
