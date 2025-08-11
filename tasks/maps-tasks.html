@@ -1,0 +1,706 @@
+<!-- Компонент с задачами на мапы -->
+<div class="maps-section">
+    <div class="section-header">
+        <h2>🗺️ Задачи на Maps (Карты)</h2>
+        <p>Изучайте работу с мапами в Go: создание, обращение, изменение и удаление элементов</p>
+    </div>
+
+    <!-- Quiz Tasks (10 задач) -->
+    <div class="quiz-tasks">
+        <h3>📋 Тестовые задачи (выберите правильный ответ)</h3>
+
+        <!-- Quiz 1 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz1')">
+                <div class="task-title">Quiz 1: Создание пустой мапы</div>
+                <div class="task-number">MQ1</div>
+            </div>
+            <div class="task-content" id="mapQuiz1" style="display: none;">
+                <div class="task-description">
+                    Какой из следующих способов правильно создает пустую мапу для хранения строк как ключей и целых
+                    чисел как значений?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz1" value="wrong1">
+                            <span>var m map[string]int</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz1" value="correct">
+                            <span>m := make(map[string]int)</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz1" value="wrong2">
+                            <span>m := map[string]int{}</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz1" value="wrong3">
+                            <span>Все варианты правильные</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="if(typeof checkMapQuiz === 'function') { checkMapQuiz('mapQuiz1', 'correct', 'Правильно! make(map[string]int) создает инициализированную пустую мапу. Простое объявление var m map[string]int создает nil мапу.'); } else { alert('Функция checkMapQuiz не найдена! Проверьте загрузку скриптов.'); }">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz1"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 2 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz2')">
+                <div class="task-title">Quiz 2: Проверка существования ключа</div>
+                <div class="task-number">MQ2</div>
+            </div>
+            <div class="task-content" id="mapQuiz2" style="display: none;">
+                <div class="task-description">
+                    Как правильно проверить, существует ли ключ "age" в мапе m?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz2" value="wrong1">
+                            <span>if m["age"] != nil</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz2" value="correct">
+                            <span>if _, ok := m["age"]; ok</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz2" value="wrong2">
+                            <span>if m.contains("age")</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz2" value="wrong3">
+                            <span>if m.hasKey("age")</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz2', 'correct', 'Правильно! В Go используется comma ok idiom: value, ok := m[key]. Переменная ok будет true если ключ существует.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 3 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz3')">
+                <div class="task-title">Quiz 3: Удаление элемента</div>
+                <div class="task-number">MQ3</div>
+            </div>
+            <div class="task-content" id="mapQuiz3" style="display: none;">
+                <div class="task-description">
+                    Как удалить ключ "temp" из мапы m?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz3" value="wrong1">
+                            <span>m.remove("temp")</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz3" value="wrong2">
+                            <span>m["temp"] = nil</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz3" value="correct">
+                            <span>delete(m, "temp")</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz3" value="wrong3">
+                            <span>m.delete("temp")</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz3', 'correct', 'Правильно! Функция delete(map, key) удаляет элемент по ключу. Это встроенная функция Go.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 4 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz4')">
+                <div class="task-title">Quiz 4: Инициализация мапы с данными</div>
+                <div class="task-number">MQ4</div>
+            </div>
+            <div class="task-content" id="mapQuiz4" style="display: none;">
+                <div class="task-description">
+                    Какой синтаксис правильно создает мапу с начальными данными?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz4" value="correct">
+                            <span>m := map[string]int{"a": 1, "b": 2}</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz4" value="wrong1">
+                            <span>m := map[string, int]{"a": 1, "b": 2}</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz4" value="wrong2">
+                            <span>m := {"a": 1, "b": 2}</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz4" value="wrong3">
+                            <span>m := new(map[string]int){"a": 1, "b": 2}</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz4', 'correct', 'Правильно! Синтаксис map[KeyType]ValueType{key1: value1, key2: value2} создает и инициализирует мапу.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 5 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz5')">
+                <div class="task-title">Quiz 5: Итерация по мапе</div>
+                <div class="task-number">MQ5</div>
+            </div>
+            <div class="task-content" id="mapQuiz5" style="display: none;">
+                <div class="task-description">
+                    Какой цикл правильно итерирует по всем элементам мапы?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz5" value="wrong1">
+                            <span>for i := 0; i < len(m); i++</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz5" value="correct">
+                            <span>for key, value := range m</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz5" value="wrong2">
+                            <span>for key in m</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz5" value="wrong3">
+                            <span>for m.hasNext()</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz5', 'correct', 'Правильно! range возвращает ключ и значение для каждого элемента мапы. Порядок итерации не гарантирован.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz5"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 6 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz6')">
+                <div class="task-title">Quiz 6: Нулевые значения мапы</div>
+                <div class="task-number">MQ6</div>
+            </div>
+            <div class="task-content" id="mapQuiz6" style="display: none;">
+                <div class="task-description">
+                    Что вернет m["nonexistent"] для несуществующего ключа в map[string]int?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz6" value="wrong1">
+                            <span>nil</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz6" value="wrong2">
+                            <span>ошибку</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz6" value="correct">
+                            <span>0 (нулевое значение int)</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz6" value="wrong3">
+                            <span>undefined</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz6', 'correct', 'Правильно! Мапа возвращает нулевое значение типа (0 для int, &quot;&quot; для string, false для bool) для несуществующих ключей.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz6"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 7 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz7')">
+                <div class="task-title">Quiz 7: Модификация мапы во время итерации</div>
+                <div class="task-number">MQ7</div>
+            </div>
+            <div class="task-content" id="mapQuiz7" style="display: none;">
+                <div class="task-description">
+                    Что произойдет, если добавить или удалить элементы мапы во время range цикла?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz7" value="wrong1">
+                            <span>Программа упадет с ошибкой</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz7" value="wrong2">
+                            <span>Изменения будут игнорированы</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz7" value="correct">
+                            <span>Поведение не определено, может работать непредсказуемо</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz7" value="wrong3">
+                            <span>Все изменения будут применены корректно</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz7', 'correct', 'Правильно! Модификация мапы во время итерации может привести к непредсказуемому поведению. Лучше собирать ключи отдельно.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz7"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 8 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz8')">
+                <div class="task-title">Quiz 8: Сравнение мап</div>
+                <div class="task-number">MQ8</div>
+            </div>
+            <div class="task-content" id="mapQuiz8" style="display: none;">
+                <div class="task-description">
+                    Можно ли сравнивать две мапы с помощью оператора ==?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz8" value="wrong1">
+                            <span>Да, всегда можно</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz8" value="correct">
+                            <span>Нет, мапы можно сравнивать только с nil</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz8" value="wrong2">
+                            <span>Можно, но только пустые мапы</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz8" value="wrong3">
+                            <span>Можно, если они одного типа</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz8', 'correct', 'Правильно! Мапы в Go не поддерживают сравнение ==, кроме сравнения с nil. Для сравнения нужна ручная реализация.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz8"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 9 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz9')">
+                <div class="task-title">Quiz 9: Вложенные мапы</div>
+                <div class="task-number">MQ9</div>
+            </div>
+            <div class="task-content" id="mapQuiz9" style="display: none;">
+                <div class="task-description">
+                    Как правильно объявить мапу, где значениями являются другие мапы?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz9" value="correct">
+                            <span>map[string]map[string]int</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz9" value="wrong1">
+                            <span>map[string][map[string]int]</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz9" value="wrong2">
+                            <span>map[string, map[string, int]]</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz9" value="wrong3">
+                            <span>map[string -> map[string -> int]]</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz9', 'correct', 'Правильно! Синтаксис map[KeyType]ValueType работает рекурсивно, ValueType может быть другой мапой.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz9"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz 10 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapQuiz10')">
+                <div class="task-title">Quiz 10: Потокобезопасность мап</div>
+                <div class="task-number">MQ10</div>
+            </div>
+            <div class="task-content" id="mapQuiz10" style="display: none;">
+                <div class="task-description">
+                    Являются ли мапы в Go потокобезопасными (thread-safe)?
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz10" value="wrong1">
+                            <span>Да, всегда потокобезопасны</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz10" value="correct">
+                            <span>Нет, нужна синхронизация или sync.Map</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz10" value="wrong2">
+                            <span>Потокобезопасны только для чтения</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="mapQuiz10" value="wrong3">
+                            <span>Зависит от типа ключа</span>
+                        </label>
+                    </div>
+                    <button class="quiz-button"
+                        onclick="checkMapQuiz('mapQuiz10', 'correct', 'Правильно! Обычные мапы не потокобезопасны. Для конкурентного доступа используйте sync.Map или мьютексы.')">
+                        ✅ Проверить ответ
+                    </button>
+                    <div class="quiz-result" id="result-mapQuiz10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Tasks (10 задач) -->
+    <div class="code-tasks">
+        <h3>💻 Практические задачи (напишите код)</h3>
+
+        <!-- Code Task 1 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode1')">
+                <div class="task-title">Code 1: Создание и заполнение мапы</div>
+                <div class="task-number">MC1</div>
+            </div>
+            <div class="task-content" id="mapCode1" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>CreateAgeMap()</code>, которая возвращает мапу с именами людей и их
+                    возрастами:
+                    "Алиса" -> 25, "Боб" -> 30, "Чарли" -> 35
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode1" class="code-input"
+                        placeholder="func CreateAgeMap() map[string]int {&#10;    // Ваш код здесь&#10;    &#10;}">func CreateAgeMap() map[string]int {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button"
+                        onclick="if(typeof checkMapCode === 'function') { checkMapCode('mapCode1'); } else { alert('Функция checkMapCode не найдена! Проверьте загрузку скриптов.'); }">🔍
+                        Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode1"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>map[Алиса:25 Боб:30 Чарли:35]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 2 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode2')">
+                <div class="task-title">Code 2: Проверка существования ключа</div>
+                <div class="task-number">MC2</div>
+            </div>
+            <div class="task-content" id="mapCode2" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>HasKey(m map[string]int, key string) bool</code>, которая проверяет,
+                    существует ли ключ в мапе.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode2" class="code-input"
+                        placeholder="func HasKey(m map[string]int, key string) bool {&#10;    // Ваш код здесь&#10;    &#10;}">func HasKey(m map[string]int, key string) bool {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode2')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode2"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>HasKey(map[a:1 b:2], "a") → true
+HasKey(map[a:1 b:2], "c") → false</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 3 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode3')">
+                <div class="task-title">Code 3: Подсчет элементов по значению</div>
+                <div class="task-number">MC3</div>
+            </div>
+            <div class="task-content" id="mapCode3" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>CountByValue(m map[string]int, value int) int</code>, которая считает,
+                    сколько ключей имеют указанное значение.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode3" class="code-input"
+                        placeholder="func CountByValue(m map[string]int, value int) int {&#10;    // Ваш код здесь&#10;    &#10;}">func CountByValue(m map[string]int, value int) int {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode3')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode3"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>CountByValue(map[a:1 b:2 c:1], 1) → 2
+CountByValue(map[a:1 b:2 c:1], 3) → 0</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 4 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode4')">
+                <div class="task-title">Code 4: Получение всех ключей</div>
+                <div class="task-number">MC4</div>
+            </div>
+            <div class="task-content" id="mapCode4" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>GetKeys(m map[string]int) []string</code>, которая возвращает
+                    все ключи мапы в виде слайса.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode4" class="code-input"
+                        placeholder="func GetKeys(m map[string]int) []string {&#10;    // Ваш код здесь&#10;    &#10;}">func GetKeys(m map[string]int) []string {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode4')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode4"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>GetKeys(map[a:1 b:2 c:3]) → [a b c] (порядок может отличаться)</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 5 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode5')">
+                <div class="task-title">Code 5: Инвертирование мапы</div>
+                <div class="task-number">MC5</div>
+            </div>
+            <div class="task-content" id="mapCode5" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>InvertMap(m map[string]int) map[int]string</code>, которая меняет местами
+                    ключи и значения. Предполагаем, что все значения уникальны.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode5" class="code-input"
+                        placeholder="func InvertMap(m map[string]int) map[int]string {&#10;    // Ваш код здесь&#10;    &#10;}">func InvertMap(m map[string]int) map[int]string {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode5')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode5"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>InvertMap(map[a:1 b:2]) → map[1:a 2:b]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 6 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode6')">
+                <div class="task-title">Code 6: Фильтрация мапы</div>
+                <div class="task-number">MC6</div>
+            </div>
+            <div class="task-content" id="mapCode6" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>FilterByValue(m map[string]int, minValue int) map[string]int</code>,
+                    которая возвращает новую мапу только с элементами, значения которых >= minValue.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode6" class="code-input"
+                        placeholder="func FilterByValue(m map[string]int, minValue int) map[string]int {&#10;    // Ваш код здесь&#10;    &#10;}">func FilterByValue(m map[string]int, minValue int) map[string]int {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode6')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode6"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>FilterByValue(map[a:1 b:5 c:3], 3) → map[b:5 c:3]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 7 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode7')">
+                <div class="task-title">Code 7: Объединение мап</div>
+                <div class="task-number">MC7</div>
+            </div>
+            <div class="task-content" id="mapCode7" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>MergeMaps(m1, m2 map[string]int) map[string]int</code>, которая объединяет
+                    две мапы.
+                    При конфликте ключей приоритет у второй мапы.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode7" class="code-input"
+                        placeholder="func MergeMaps(m1, m2 map[string]int) map[string]int {&#10;    // Ваш код здесь&#10;    &#10;}">func MergeMaps(m1, m2 map[string]int) map[string]int {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode7')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode7"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>MergeMaps(map[a:1 b:2], map[b:3 c:4]) → map[a:1 b:3 c:4]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 8 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode8')">
+                <div class="task-title">Code 8: Поиск ключа с максимальным значением</div>
+                <div class="task-number">MC8</div>
+            </div>
+            <div class="task-content" id="mapCode8" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>FindMaxKey(m map[string]int) string</code>, которая возвращает ключ
+                    с максимальным значением. Если мапа пустая, верните пустую строку.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode8" class="code-input"
+                        placeholder="func FindMaxKey(m map[string]int) string {&#10;    // Ваш код здесь&#10;    &#10;}">func FindMaxKey(m map[string]int) string {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode8')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode8"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>FindMaxKey(map[a:1 b:5 c:3]) → "b"
+FindMaxKey(map[]) → ""</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 9 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode9')">
+                <div class="task-title">Code 9: Группировка по длине ключа</div>
+                <div class="task-number">MC9</div>
+            </div>
+            <div class="task-content" id="mapCode9" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>GroupByKeyLength(m map[string]int) map[int][]string</code>, которая
+                    группирует
+                    ключи по их длине.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode9" class="code-input"
+                        placeholder="func GroupByKeyLength(m map[string]int) map[int][]string {&#10;    // Ваш код здесь&#10;    &#10;}">func GroupByKeyLength(m map[string]int) map[int][]string {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode9')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode9"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>GroupByKeyLength(map[a:1 bb:2 ccc:3]) → map[1:[a] 2:[bb] 3:[ccc]]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Task 10 -->
+        <div class="task map-task">
+            <div class="task-header" onclick="toggleTask('mapCode10')">
+                <div class="task-title">Code 10: Подсчет частоты символов</div>
+                <div class="task-number">MC10</div>
+            </div>
+            <div class="task-content" id="mapCode10" style="display: none;">
+                <div class="task-description">
+                    Создайте функцию <code>CharFrequency(s string) map[rune]int</code>, которая подсчитывает
+                    частоту каждого символа в строке.
+                </div>
+
+                <div class="code-container">
+                    <textarea id="code-mapCode10" class="code-input"
+                        placeholder="func CharFrequency(s string) map[rune]int {&#10;    // Ваш код здесь&#10;    &#10;}">func CharFrequency(s string) map[rune]int {
+    // Ваш код здесь
+    
+}</textarea>
+                    <button class="check-code-button" onclick="checkMapCode('mapCode10')">🔍 Проверить код</button>
+                    <div class="code-result" id="codeResult-mapCode10"></div>
+                </div>
+
+                <div class="expected-output">
+                    <strong>Ожидаемый результат:</strong>
+                    <pre>CharFrequency("hello") → map[h:1 e:1 l:2 o:1]</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,673 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    font-weight: 400;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+/* Стили для кнопок в header */
+header button {
+    background: rgba(255,255,255,0.2) !important;
+    color: white !important;
+    border: 2px solid white !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    margin: 0 10px !important;
+    transition: all 0.3s ease !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+header button:hover {
+    background: rgba(255,255,255,0.3) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.2) !important;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.tasks-container {
+    padding: 30px;
+}
+
+.task {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.task:hover {
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Стили для уведомлений об ошибках */
+.component-notification.error {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+}
+
+.component-notification.success {
+    background: linear-gradient(135deg, #00b894, #00a085);
+    color: white;
+}
+
+.task-header {
+    background: #343a40;
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-header:hover {
+    background: #495057;
+}
+
+.task-title {
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.task-number {
+    background: #007bff;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.task-content {
+    padding: 25px;
+}
+
+.task-description {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #4a5568;
+    font-weight: 400;
+}
+
+.example {
+    background: #e3f2fd;
+    border-left: 4px solid #2196F3;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.example-title {
+    font-weight: 600;
+    color: #1976D2;
+    margin-bottom: 8px;
+}
+
+/* Стили для подсветки синтаксиса */
+pre[class*="language-"] {
+    margin: 15px 0;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+code[class*="language-"] {
+    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+    font-size: 14px;
+}
+
+.inline-code {
+    background: #f1f5f9;
+    color: #e53e3e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+}
+
+.button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px 10px 0;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+.button.hint {
+    background: #28a745;
+}
+
+.button.hint:hover {
+    background: #1e7e34;
+}
+
+.button.solution {
+    background: #dc3545;
+}
+
+.button.solution:hover {
+    background: #c82333;
+}
+
+.hidden-content {
+    display: none;
+    margin-top: 15px;
+    padding: 20px;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.solution-content {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hint-title,
+.solution-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.hint-title {
+    color: #155724;
+}
+
+.solution-title {
+    color: #721c24;
+}
+
+.hint-content p {
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.progress-bar {
+    background: #e9ecef;
+    height: 8px;
+    border-radius: 4px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2em;
+    font-weight: 700;
+    color: #007bff;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+.footer {
+    background: #343a40;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-weight: 400;
+}
+
+/* Стили для квизов */
+.quiz-container {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.quiz-question {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.quiz-options {
+    margin: 15px 0;
+}
+
+.quiz-option {
+    display: block;
+    margin: 10px 0;
+    padding: 12px;
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+}
+
+.quiz-option:hover {
+    border-color: #007bff;
+    background: #f8f9fa;
+}
+
+.quiz-option.correct {
+    border-color: #28a745;
+    background: #d4edda;
+    color: #155724;
+}
+
+.quiz-option.wrong {
+    border-color: #dc3545;
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.quiz-option input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.quiz-result {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: none;
+}
+
+.quiz-result.correct {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
+}
+
+.quiz-result.wrong {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #dc3545;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .task-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* Стили для табов */
+.tab-navigation {
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 20px 0px 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button {
+    flex: 1;
+    padding: 15px 20px;
+    background: #e9ecef;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #495057;
+    transition: all 0.3s ease;
+    border-right: 1px solid #dee2e6;
+}
+
+.tab-button:last-child {
+    border-right: none;
+}
+
+.tab-button.active {
+    background: #007bff;
+    color: white;
+}
+
+.tab-button:hover {
+    background: #0056b3;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Стили для теории */
+.theory-section {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    margin: 25px 20px;
+    overflow: hidden;
+}
+
+.theory-header {
+    background: #28a745;
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.theory-header:hover {
+    background: #218838;
+}
+
+.theory-title {
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.theory-icon {
+    background: #ffffff;
+    color: #28a745;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.theory-content {
+    padding: 30px;
+    background: white;
+    line-height: 1.6;
+}
+
+.theory-subsection {
+    margin-bottom: 35px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.theory-subsection h3 {
+    color: #495057;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    font-weight: 600;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.theory-subsection h4 {
+    color: #6c757d;
+    margin: 20px 0 15px 0;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.theory-subsection p {
+    margin-bottom: 15px;
+    color: #495057;
+    line-height: 1.7;
+}
+
+.theory-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.theory-list li {
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: white;
+    border-radius: 5px;
+    border-left: 3px solid #007bff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.theory-list li:hover {
+    transform: translateX(5px);
+}
+
+.theory-list li:last-child {
+    border-bottom: none;
+}
+
+.theory-code {
+    background: #2d3748;
+    color: #e2e8f0;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid #4a5568;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+    padding: 0 20px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+.theory-code pre {
+    margin: -20px;
+    padding: 20px;
+    background: transparent;
+    color: inherit;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+.theory-code code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.theory-code::before {
+    content: 'Go';
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    background: #48bb78;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: 500;
+    z-index: 1;
+}
+
+/* Переопределяем стили Prism для теории */
+.theory-code .token.keyword {
+    color: #ff7979 !important;
+    font-weight: 600;
+}
+
+.theory-code .token.string {
+    color: #55a3ff !important;
+}
+
+.theory-code .token.comment {
+    color: #74b9ff !important;
+    font-style: italic;
+}
+
+.theory-code .token.number {
+    color: #fdcb6e !important;
+}
+
+.theory-code .token.function {
+    color: #fd79a8 !important;
+}
+
+.theory-code .token.builtin {
+    color: #00b894 !important;
+}
+
+.theory-code .token.operator {
+    color: #a29bfe !important;
+}
+
+.highlight {
+    background: linear-gradient(120deg, #a8e6cf 0%, #88d8a3 100%);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #2d3436;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптивные стили для теории */
+@media (max-width: 768px) {
+    .theory-content {
+        padding: 20px;
+    }
+
+    .theory-subsection {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .theory-subsection h3 {
+        font-size: 1.2em;
+    }
+
+    .theory-subsection h4 {
+        font-size: 1.1em;
+    }
+
+    .theory-code {
+        margin: 15px 0;
+    }
+
+    .theory-code pre {
+        padding: 15px;
+    }
+
+    .theory-code code {
+        font-size: 0.9em;
+    }
+
+    .theory-header {
+        padding: 15px;
+    }
+
+    .theory-title {
+        font-size: 1.2em;
+    }
+
+    .theory-list li {
+        padding: 10px 12px;
+    }
+}

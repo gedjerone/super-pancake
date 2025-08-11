@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Go Array Tasks - Задачи по массивам</title>
+    <!-- Подключаем красивый шрифт -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Подключаем Prism.js для подсветки синтаксиса -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <!-- Подключаем шрифт для кода -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Go Array Tasks</h1>
+            <p class="subtitle">Изучайте работу с Go через практические задачи</p>
+
+            <!-- Кнопки управления компонентами -->
+            <!-- <div style="margin-top: 20px;">
+                <button onclick="reloadAllComponents()" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; 
+                               padding: 10px 20px; border-radius: 25px; cursor: pointer; margin: 0 10px;
+                               transition: all 0.3s ease; font-weight: 600;">
+                    🔄 Перезагрузить компоненты
+                </button>
+                <button onclick="showNotification('Все компоненты работают корректно! ✅')" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; 
+                               padding: 10px 20px; border-radius: 25px; cursor: pointer; margin: 0 10px;
+                               transition: all 0.3s ease; font-weight: 600;">
+                    ✅ Проверить статус
+                </button>
+            </div> -->
+        </header>
+
+        <!-- Навигация по вкладкам -->
+        <div class="tab-navigation">
+            <button class="tab-button active" onclick="showTab('practice')">📝 Практические задачи</button>
+            <button class="tab-button" onclick="showTab('theory')">📚 Теория Go</button>
+        </div>
+
+        <!-- Вкладка практических задач -->
+        <div id="practice" class="tab-content active">
+            <div class="tasks-container">
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number" id="completedTasks">0</div>
+                        <div class="stat-label">Выполнено задач</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">60</div>
+                        <div class="stat-label">Всего задач</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="hintsUsed">0</div>
+                        <div class="stat-label">Подсказок использовано</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <ui-include src="tasks/task1.html"></ui-include>
+                <ui-include src="tasks/task2.html"></ui-include>
+                <ui-include src="tasks/task3.html"></ui-include>
+                <ui-include src="tasks/task4.html"></ui-include>
+                <ui-include src="tasks/task5.html"></ui-include>
+
+                <!-- Компонент с задачами на мапы -->
+                <ui-include src="tasks/maps-tasks.html" css="styles/maps-tasks.css"></ui-include>
+
+                <!-- Компонент с задачами по созданию базы данных -->
+                <ui-include src="tasks/database-tasks.html" css="styles/database-tasks.css"></ui-include>
+
+                <div class="footer" style="margin-top: 40px; text-align: center; border-radius: 0.6rem;">
+                    <p>🎓 Удачи в изучении Go! Практикуйтесь и становитесь лучше каждый день.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка теории -->
+        <div id="theory" class="tab-content">
+
+            <ui-include src="theory/theory1.html"></ui-include>
+            <ui-include src="theory/theory2.html"></ui-include>
+            <ui-include src="theory/theory3.html"></ui-include>
+            <ui-include src="theory/theory4.html"></ui-include>
+            <ui-include src="theory/theory5.html"></ui-include>
+            <ui-include src="theory/theory6.html"></ui-include>
+
+
+            <!-- Подключаем Prism.js для подсветки синтаксиса -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+            <script src="scripts/script.js"></script>
+</body>
+
+</html>

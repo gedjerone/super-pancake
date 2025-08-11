@@ -1,0 +1,431 @@
+<!-- Разделитель для задач на циклы и условия -->
+<div style="margin: 40px 0; text-align: center; color: #6c757d; font-size: 1.2em; font-weight: 600;">
+    🔄 Задачи на циклы и условия
+</div>
+
+<!-- Basics Task 1: IsEven -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic1')">
+        <div class="task-title">IsEven - Проверка четности</div>
+        <div class="task-number">B1</div>
+    </div>
+    <div class="task-content" id="basic1" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает целое число и возвращает true, если число четное, и
+            false,
+            если нечетное.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">IsEven(4) → true
+IsEven(7) → false</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB1')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB1')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB1">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте оператор остатка от деления <span class="inline-code">%</span></p>
+                <p>• Четное число дает остаток 0 при делении на 2</p>
+                <p>• Используйте условие <span class="inline-code">if</span></p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB1">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func IsEven(n int) bool {
+    return n%2 == 0
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 2: PrintCountdown -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic2')">
+        <div class="task-title">PrintCountdown - Обратный отсчет</div>
+        <div class="task-number">B2</div>
+    </div>
+    <div class="task-content" id="basic2" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число N и выводит числа от N до 1 в обратном порядке.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">PrintCountdown(5) → выводит: 5 4 3 2 1</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB2')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB2')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB2">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте цикл for</p>
+                <p>• Начните с N и уменьшайте до 1</p>
+                <p>• Используйте i-- для уменьшения счетчика</p>
+                <p>• Выводите числа через пробел</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB2">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func PrintCountdown(n int) {
+    for i := n; i >= 1; i-- {
+        fmt.Print(i, " ")
+    }
+    fmt.Println()
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 3: CountEvens -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic3')">
+        <div class="task-title">CountEvens - Подсчет четных чисел</div>
+        <div class="task-number">B3</div>
+    </div>
+    <div class="task-content" id="basic3" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число N и возвращает количество четных чисел от 1 до N
+            включительно.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">CountEvens(10) → 5  // четные числа: 2, 4, 6, 8, 10</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB3')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB3')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB3">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте переменную счетчика</p>
+                <p>• Используйте цикл от 1 до N</p>
+                <p>• Проверяйте каждое число на четность с помощью %</p>
+                <p>• Увеличивайте счетчик для четных чисел</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB3">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CountEvens(n int) int {
+    count := 0
+    for i := 1; i <= n; i++ {
+        if i%2 == 0 {
+            count++
+        }
+    }
+    return count
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 4: PrintOdds -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic4')">
+        <div class="task-title">PrintOdds - Вывод нечетных чисел</div>
+        <div class="task-number">B4</div>
+    </div>
+    <div class="task-content" id="basic4" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число N и выводит все нечетные числа от 1 до N.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">PrintOdds(10) → выводит: 1 3 5 7 9</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB4')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB4')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB4">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте цикл от 1 до N</p>
+                <p>• Проверяйте каждое число на нечетность</p>
+                <p>• Нечетное число: остаток от деления на 2 равен 1</p>
+                <p>• Выводите только нечетные числа</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB4">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func PrintOdds(n int) {
+    for i := 1; i <= n; i++ {
+        if i%2 == 1 {
+            fmt.Print(i, " ")
+        }
+    }
+    fmt.Println()
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 5: CheckRange -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic5')">
+        <div class="task-title">CheckRange - Проверка диапазона</div>
+        <div class="task-number">B5</div>
+    </div>
+    <div class="task-content" id="basic5" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число и возвращает true, если число находится в
+            диапазоне от
+            10 до
+            20 включительно.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">CheckRange(15) → true   // 15 в диапазоне 10-20
+CheckRange(5) → false   // 5 меньше 10
+CheckRange(25) → false  // 25 больше 20</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB5')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB5')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB5">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте логический оператор && (И)</p>
+                <p>• Проверьте: число >= 10 И число <= 20</p>
+                        <p>• Верните результат проверки</p>
+                        <p>• Можно написать в одну строку</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB5">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CheckRange(n int) bool {
+    return n >= 10 && n <= 20
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 6: FindMax -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic6')">
+        <div class="task-title">FindMax - Максимальное из двух чисел</div>
+        <div class="task-number">B6</div>
+    </div>
+    <div class="task-content" id="basic6" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает два числа и возвращает большее из них.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">FindMax(10, 25) → 25
+FindMax(100, 50) → 100</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB6')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB6')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB6">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте условие <span class="inline-code">if-else</span></p>
+                <p>• Сравните два числа с помощью оператора <span class="inline-code">></span></p>
+                <p>• Верните подходящее число в каждом случае</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB6">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func FindMax(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 7: PrintSteps -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic7')">
+        <div class="task-title">PrintSteps - Вывод с шагом</div>
+        <div class="task-number">B7</div>
+    </div>
+    <div class="task-content" id="basic7" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число N и выводит каждое второе число от 2 до N (четные
+            числа).
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">PrintSteps(10) → выводит: 2 4 6 8 10</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB7')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB7')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB7">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте цикл с шагом 2</p>
+                <p>• Начните с 2 и увеличивайте на 2 каждый раз</p>
+                <p>• Условие цикла: i <= N</p>
+                        <p>• Выводите каждое число через пробел</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB7">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func PrintSteps(n int) {
+    for i := 2; i <= n; i += 2 {
+        fmt.Print(i, " ")
+    }
+    fmt.Println()
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 8: PrintUntil -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic8')">
+        <div class="task-title">PrintUntil - Вывод до условия</div>
+        <div class="task-number">B8</div>
+    </div>
+    <div class="task-content" id="basic8" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число N и выводит числа от 1 до N, но останавливается,
+            если
+            встречает число 7.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">PrintUntil(10) → выводит: 1 2 3 4 5 6</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB8')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB8')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB8">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте цикл от 1 до N</p>
+                <p>• В каждой итерации проверяйте значение i</p>
+                <p>• Если i равно 7, используйте break для выхода</p>
+                <p>• Иначе выводите число</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB8">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func PrintUntil(n int) {
+    for i := 1; i <= n; i++ {
+        if i == 7 {
+            break
+        }
+        fmt.Print(i, " ")
+    }
+    fmt.Println()
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 9: SkipNumbers -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic9')">
+        <div class="task-title">SkipNumbers - Пропуск чисел</div>
+        <div class="task-number">B9</div>
+    </div>
+    <div class="task-content" id="basic9" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает число N и выводит числа от 1 до N, но пропускает числа
+            кратные 3.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">SkipNumbers(10) → выводит: 1 2 4 5 7 8 10</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB9')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB9')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB9">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте цикл от 1 до N</p>
+                <p>• Проверяйте кратность числа 3 с помощью %</p>
+                <p>• Если число кратно 3, используйте continue</p>
+                <p>• Иначе выводите число</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB9">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func SkipNumbers(n int) {
+    for i := 1; i <= n; i++ {
+        if i%3 == 0 {
+            continue
+        }
+        fmt.Print(i, " ")
+    }
+    fmt.Println()
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Basics Task 10: CheckGrade -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('basic10')">
+        <div class="task-title">CheckGrade - Определение оценки</div>
+        <div class="task-number">B10</div>
+    </div>
+    <div class="task-content" id="basic10" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает балл (0-100) и возвращает соответствующую оценку:
+            90-100: "A", 80-89: "B", 70-79: "C", 60-69: "D", менее 60: "F".
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">CheckGrade(95) → "A"
+CheckGrade(75) → "C"
+CheckGrade(45) → "F"</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintB10')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionB10')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintB10">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте последовательность <span class="inline-code">if-else if</span></p>
+                <p>• Проверяйте диапазоны от большего к меньшему</p>
+                <p>• Начните с проверки score >= 90</p>
+                <p>• Последний случай - это оценка "F"</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionB10">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CheckGrade(score int) string {
+    if score >= 90 {
+        return "A"
+    } else if score >= 80 {
+        return "B"
+    } else if score >= 70 {
+        return "C"
+    } else if score >= 60 {
+        return "D"
+    } else {
+        return "F"
+    }
+}</code></pre>
+        </div>
+    </div>
+</div>

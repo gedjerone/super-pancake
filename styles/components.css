@@ -1,0 +1,164 @@
+/* Стили для динамически загружаемых компонентов */
+
+/* Анимация появления компонентов */
+.component-loading {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.component-loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Стили для ошибок загрузки */
+.error {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Специальные стили для задач */
+.task-dynamic {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    margin: 20px 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.task-dynamic:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.task-dynamic .task-header {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.task-dynamic .task-header:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.task-dynamic .task-title {
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.task-dynamic .task-number {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    min-width: 40px;
+    text-align: center;
+}
+
+.task-dynamic .task-content {
+    background: white;
+    padding: 25px;
+    color: #333;
+}
+
+/* Стили для интерактивных элементов в компонентах */
+.component-button {
+    background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 10px 5px;
+    box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
+}
+
+.component-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 154, 86, 0.4);
+}
+
+.component-button.hint {
+    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+    color: #333;
+}
+
+.component-button.solution {
+    background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+    color: #333;
+}
+
+/* Стили для загрузки */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Стили для уведомлений */
+.component-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #00b894, #00a085);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.component-notification.show {
+    transform: translateX(0);
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .task-dynamic .task-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .component-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .component-notification {
+        right: 10px;
+        left: 10px;
+        transform: translateY(-100%);
+    }
+    
+    .component-notification.show {
+        transform: translateY(0);
+    }
+}

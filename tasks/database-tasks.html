@@ -1,0 +1,707 @@
+<!-- Компонент задач по созданию in-memory базы данных -->
+<div class="database-section">
+    <div class="section-header">
+        <h2>🗄️ Создание In-Memory базы данных</h2>
+        <p>Изучайте структуры, мапы, слайсы и функции через разработку собственной базы данных</p>
+    </div>
+
+    <!-- Введение в проект -->
+    <div class="project-intro">
+        <div class="intro-content">
+            <h3>📋 Описание проекта</h3>
+            <div class="intro-description">
+                <p><strong>Что такое In-Memory база данных?</strong></p>
+                <p>In-Memory база данных — это система управления данными, которая хранит информацию в оперативной
+                    памяти (RAM) вместо жесткого диска. Это обеспечивает очень быстрый доступ к данным, но информация
+                    теряется при перезагрузке программы.</p>
+
+                <p><strong>Что мы будем создавать:</strong></p>
+                <ul>
+                    <li>🏗️ Структуру для хранения данных пользователей</li>
+                    <li>🗺️ Систему индексации на основе map</li>
+                    <li>📝 CRUD операции (Create, Read, Update, Delete)</li>
+                    <li>🔍 Функционал поиска по различным критериям</li>
+                    <li>📊 Статистику и аналитику данных</li>
+                </ul>
+
+                <p><strong>Технологии Go, которые изучим:</strong></p>
+                <div class="tech-tags">
+                    <span class="tech-tag">struct</span>
+                    <span class="tech-tag">map</span>
+                    <span class="tech-tag">slice</span>
+                    <span class="tech-tag">функции</span>
+                    <span class="tech-tag">циклы</span>
+                    <span class="tech-tag">условия</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Задача 1: Структуры -->
+    <div class="database-tasks">
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask1')">
+                <div class="task-title">Задача 1: Создание структуры User</div>
+                <div class="task-number">DB1</div>
+            </div>
+            <div class="task-content" id="dbTask1" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте структуру <code>User</code> для хранения информации о пользователях в нашей базе данных.
+                    </p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Структуры в Go</h4>
+                        <p>Структуры в Go — это пользовательские типы данных, которые группируют связанные данные
+                            вместе. Они похожи на классы в других языках, но без методов (методы добавляются отдельно).
+                        </p>
+
+                        <pre><code class="language-go">type Person struct {
+    Name string
+    Age  int
+    Email string
+}</code></pre>
+                    </div>
+
+                    <p><strong>Требования к структуре User:</strong></p>
+                    <ul>
+                        <li><code>ID</code> — уникальный идентификатор (int)</li>
+                        <li><code>Name</code> — имя пользователя (string)</li>
+                        <li><code>Email</code> — электронная почта (string)</li>
+                        <li><code>Age</code> — возраст (int)</li>
+                        <li><code>City</code> — город (string)</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask1')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask1" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">type User struct {
+    ID    int    `json:"id"`
+    Name  string `json:"name"`
+    Email string `json:"email"`
+    Age   int    `json:"age"`
+    City  string `json:"city"`
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li>Каждое поле имеет свой тип данных</li>
+                        <li>JSON теги помогут при сериализации (опционально)</li>
+                        <li>ID будет использоваться как ключ в нашей map</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Задача 2: Структура базы данных -->
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask2')">
+                <div class="task-title">Задача 2: Структура Database</div>
+                <div class="task-number">DB2</div>
+            </div>
+            <div class="task-content" id="dbTask2" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте структуру <code>Database</code> для управления коллекцией пользователей.</p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Maps в Go</h4>
+                        <p>Map в Go — это встроенный тип данных для хранения пар ключ-значение. Это аналог HashMap в
+                            Java или dict в Python.</p>
+
+                        <pre><code class="language-go">// Объявление map
+var users map[int]User
+users = make(map[int]User)
+
+// Или сразу инициализация
+users := make(map[int]User)</code></pre>
+                    </div>
+
+                    <p><strong>Структура Database должна содержать:</strong></p>
+                    <ul>
+                        <li><code>Users</code> — map для хранения пользователей (map[int]User)</li>
+                        <li><code>NextID</code> — счётчик для генерации уникальных ID (int)</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask2')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask2" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">type Database struct {
+    Users  map[int]User `json:"users"`
+    NextID int          `json:"next_id"`
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li><code>Users</code> — map где ключ (int) это ID пользователя</li>
+                        <li><code>NextID</code> — автоинкрементируемый счётчик ID</li>
+                        <li>Map обеспечивает O(1) доступ к пользователю по ID</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Задача 3: Функция создания -->
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask3')">
+                <div class="task-title">Задача 3: Create - Добавление пользователя</div>
+                <div class="task-number">DB3</div>
+            </div>
+            <div class="task-content" id="dbTask3" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте метод <code>CreateUser</code> для добавления нового пользователя в базу данных.</p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Методы в Go</h4>
+                        <p>Методы в Go — это функции, привязанные к определённому типу. Они позволяют добавлять
+                            поведение к структурам.</p>
+
+                        <pre><code class="language-go">func (db *Database) MethodName(parameters) returnType {
+    // Код метода
+ }</code></pre>
+                    </div>
+
+                    <p><strong>Метод должен:</strong></p>
+                    <ul>
+                        <li>Принимать параметры: name, email, age, city</li>
+                        <li>Автоматически генерировать уникальный ID</li>
+                        <li>Создавать User и добавлять в map</li>
+                        <li>Возвращать созданного пользователя</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask3')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask3" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">func (db *Database) CreateUser(name, email, city string, age int) User {
+    user := User{
+        ID:    db.NextID,
+        Name:  name,
+        Email: email,
+        Age:   age,
+        City:  city,
+    }
+    
+    db.Users[db.NextID] = user
+    db.NextID++
+    
+    return user
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li>Создаём User с текущим NextID</li>
+                        <li>Добавляем в map по ключу ID</li>
+                        <li>Увеличиваем NextID для следующего пользователя</li>
+                        <li>Возвращаем созданного пользователя</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Задача 4: Read операция -->
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask4')">
+                <div class="task-title">Задача 4: Read - Чтение пользователя</div>
+                <div class="task-number">DB4</div>
+            </div>
+            <div class="task-content" id="dbTask4" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте метод <code>GetUser</code> для получения пользователя по ID.</p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Проверка существования в map</h4>
+                        <p>В Go можно проверить, существует ли ключ в map, используя специальный синтаксис:</p>
+
+                        <pre><code class="language-go">value, exists := myMap[key]
+ if exists {
+     // Ключ найден
+ } else {
+     // Ключ не найден
+ }</code></pre>
+                    </div>
+
+                    <p><strong>Метод должен:</strong></p>
+                    <ul>
+                        <li>Принимать ID пользователя</li>
+                        <li>Возвращать пользователя и статус успеха</li>
+                        <li>Обрабатывать случай, когда пользователь не найден</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask4')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask4" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">func (db *Database) GetUser(id int) (User, bool) {
+    user, exists := db.Users[id]
+    return user, exists
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li>Используем проверку существования ключа в map</li>
+                        <li>Возвращаем пользователя и статус (найден/не найден)</li>
+                        <li>Если пользователь не найден, возвращается нулевое значение User</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Задача 5: Update операция -->
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask5')">
+                <div class="task-title">Задача 5: Update - Обновление пользователя</div>
+                <div class="task-number">DB5</div>
+            </div>
+            <div class="task-content" id="dbTask5" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте метод <code>UpdateUser</code> для обновления информации о пользователе.</p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Условные операторы</h4>
+                        <p>Условные операторы позволяют выполнять код только при определённых условиях:</p>
+
+                        <pre><code class="language-go">if condition {
+     // выполняется если condition == true
+ } else {
+     // выполняется если condition == false
+ }</code></pre>
+                    </div>
+
+                    <p><strong>Метод должен:</strong></p>
+                    <ul>
+                        <li>Принимать ID и новые данные пользователя</li>
+                        <li>Проверять, существует ли пользователь</li>
+                        <li>Обновлять данные, если пользователь найден</li>
+                        <li>Возвращать успех/неудачу операции</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask5')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask5" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">func (db *Database) UpdateUser(id int, name, email, city string, age int) bool {
+    if _, exists := db.Users[id]; exists {
+        db.Users[id] = User{
+            ID:    id,
+            Name:  name,
+            Email: email,
+            Age:   age,
+            City:  city,
+        }
+        return true
+    }
+    return false
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li>Проверяем существование пользователя</li>
+                        <li>Если найден — создаём новый User с обновлёнными данными</li>
+                        <li>Заменяем старого пользователя в map</li>
+                        <li>Возвращаем true при успехе, false при неудаче</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Задача 6: Delete операция -->
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask6')">
+                <div class="task-title">Задача 6: Delete - Удаление пользователя</div>
+                <div class="task-number">DB6</div>
+            </div>
+            <div class="task-content" id="dbTask6" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте метод <code>DeleteUser</code> для удаления пользователя из базы данных.</p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Удаление из map</h4>
+                        <p>Для удаления элемента из map используется встроенная функция delete:</p>
+
+                        <pre><code class="language-go">delete(mapName, key)</code></pre>
+                    </div>
+
+                    <p><strong>Метод должен:</strong></p>
+                    <ul>
+                        <li>Принимать ID пользователя для удаления</li>
+                        <li>Проверять, существует ли пользователь</li>
+                        <li>Удалять пользователя из map</li>
+                        <li>Возвращать успех/неудачу операции</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask6')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask6" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">func (db *Database) DeleteUser(id int) bool {
+    if _, exists := db.Users[id]; exists {
+        delete(db.Users, id)
+        return true
+    }
+    return false
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li>Проверяем существование пользователя</li>
+                        <li>Если найден — удаляем функцией delete</li>
+                        <li>Возвращаем true при успехе, false если пользователь не найден</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Задача 7: Search по городу -->
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask7')">
+                <div class="task-title">Задача 7: Search - Поиск по городу</div>
+                <div class="task-number">DB7</div>
+            </div>
+            <div class="task-content" id="dbTask7" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте метод <code>FindUsersByCity</code> для поиска всех пользователей из определённого
+                        города.</p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Циклы и slices</h4>
+                        <p>Для перебора map используется цикл range, а для накопления результатов — slice:</p>
+
+                        <pre><code class="language-go">var result []User
+ for key, value := range myMap {
+     if condition {
+         result = append(result, value)
+     }
+ }</code></pre>
+                    </div>
+
+                    <p><strong>Метод должен:</strong></p>
+                    <ul>
+                        <li>Принимать название города</li>
+                        <li>Перебирать всех пользователей</li>
+                        <li>Собирать пользователей из указанного города</li>
+                        <li>Возвращать slice найденных пользователей</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask7')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask7" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">func (db *Database) FindUsersByCity(city string) []User {
+    var result []User
+    
+    for _, user := range db.Users {
+        if user.City == city {
+            result = append(result, user)
+        }
+    }
+    
+    return result
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li>Создаём пустой slice для результатов</li>
+                        <li>Перебираем всех пользователей циклом range</li>
+                        <li>Проверяем условие (город совпадает)</li>
+                        <li>Добавляем подходящих пользователей в результат</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Задача 8: Статистика -->
+        <div class="task database-task">
+            <div class="task-header" onclick="toggleTask('dbTask8')">
+                <div class="task-title">Задача 8: Статистика - Средний возраст</div>
+                <div class="task-number">DB8</div>
+            </div>
+            <div class="task-content" id="dbTask8" style="display: none;">
+                <div class="task-description">
+                    <p>Создайте метод <code>GetAverageAge</code> для вычисления среднего возраста всех пользователей.
+                    </p>
+
+                    <div class="theory-block">
+                        <h4>💡 Краткая теория: Накопители и вычисления</h4>
+                        <p>Для вычислений часто используются накопители:</p>
+
+                        <pre><code class="language-go">sum := 0
+ count := 0
+ for _, value := range collection {
+     sum += value.Number
+     count++
+ }
+ average := float64(sum) / float64(count)</code></pre>
+                    </div>
+
+                    <p><strong>Метод должен:</strong></p>
+                    <ul>
+                        <li>Перебрать всех пользователей</li>
+                        <li>Подсчитать сумму возрастов и количество</li>
+                        <li>Вычислить средний возраст</li>
+                        <li>Возвращать float64 (для точности)</li>
+                    </ul>
+                </div>
+
+                <button class="solution-button" onclick="toggleSolution('solution-dbTask8')">
+                    💡 Показать решение
+                </button>
+                <div class="solution-content" id="solution-dbTask8" style="display: none;">
+                    <h4>✅ Правильное решение:</h4>
+                    <pre><code class="language-go">func (db *Database) GetAverageAge() float64 {
+    if len(db.Users) == 0 {
+        return 0
+    }
+    
+    sum := 0
+    for _, user := range db.Users {
+        sum += user.Age
+    }
+    
+    return float64(sum) / float64(len(db.Users))
+}</code></pre>
+                    <p><strong>Объяснение:</strong></p>
+                    <ul>
+                        <li>Проверяем, есть ли пользователи (избегаем деления на ноль)</li>
+                        <li>Суммируем все возрасты</li>
+                        <li>Делим на количество пользователей</li>
+                        <li>Приводим к float64 для точности</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Финальный пример использования -->
+    <div class="final-example">
+        <div class="example-content">
+            <h3>🚀 Финальный пример: Полная программа</h3>
+            <p>Вот как будет выглядеть полная программа с использованием нашей базы данных:</p>
+
+            <button class="solution-button" onclick="toggleSolution('final-example-code')">
+                💻 Показать полную программу
+            </button>
+
+            <div class="solution-content" id="final-example-code" style="display: none;">
+                <h4>📄 main.go - Полная программа</h4>
+                <pre><code class="language-go">package main
+
+import (
+    "fmt"
+)
+
+// Структура пользователя
+type User struct {
+    ID    int    `json:"id"`
+    Name  string `json:"name"`
+    Email string `json:"email"`
+    Age   int    `json:"age"`
+    City  string `json:"city"`
+}
+
+// Структура базы данных
+type Database struct {
+    Users  map[int]User `json:"users"`
+    NextID int          `json:"next_id"`
+}
+
+// Конструктор для создания новой БД
+func NewDatabase() *Database {
+    return &Database{
+        Users:  make(map[int]User),
+        NextID: 1,
+    }
+}
+
+// Create - создание пользователя
+func (db *Database) CreateUser(name, email, city string, age int) User {
+    user := User{
+        ID:    db.NextID,
+        Name:  name,
+        Email: email,
+        Age:   age,
+        City:  city,
+    }
+    
+    db.Users[db.NextID] = user
+    db.NextID++
+    
+    return user
+}
+
+// Read - чтение пользователя
+func (db *Database) GetUser(id int) (User, bool) {
+    user, exists := db.Users[id]
+    return user, exists
+}
+
+// Update - обновление пользователя
+func (db *Database) UpdateUser(id int, name, email, city string, age int) bool {
+    if _, exists := db.Users[id]; exists {
+        db.Users[id] = User{
+            ID:    id,
+            Name:  name,
+            Email: email,
+            Age:   age,
+            City:  city,
+        }
+        return true
+    }
+    return false
+}
+
+// Delete - удаление пользователя
+func (db *Database) DeleteUser(id int) bool {
+    if _, exists := db.Users[id]; exists {
+        delete(db.Users, id)
+        return true
+    }
+    return false
+}
+
+// Search - поиск по городу
+func (db *Database) FindUsersByCity(city string) []User {
+    var result []User
+    
+    for _, user := range db.Users {
+        if user.City == city {
+            result = append(result, user)
+        }
+    }
+    
+    return result
+}
+
+// Stats - статистика
+func (db *Database) GetAverageAge() float64 {
+    if len(db.Users) == 0 {
+        return 0
+    }
+    
+    sum := 0
+    for _, user := range db.Users {
+        sum += user.Age
+    }
+    
+    return float64(sum) / float64(len(db.Users))
+}
+
+// Вспомогательная функция для вывода пользователя
+func (db *Database) PrintUser(user User) {
+    fmt.Printf("ID: %d, Имя: %s, Email: %s, Возраст: %d, Город: %s\n",
+        user.ID, user.Name, user.Email, user.Age, user.City)
+}
+
+func main() {
+    // Создаём новую базу данных
+    db := NewDatabase()
+    
+    fmt.Println("🗄️ Демонстрация работы In-Memory базы данных")
+    fmt.Println("=" * 50)
+    
+    // CREATE - добавляем пользователей
+    fmt.Println("\n📝 Добавляем пользователей:")
+    user1 := db.CreateUser("Алексей Петров", "alex@example.com", "Москва", 25)
+    user2 := db.CreateUser("Мария Иванова", "maria@example.com", "СПб", 30)
+    user3 := db.CreateUser("Иван Сидоров", "ivan@example.com", "Москва", 28)
+    
+    fmt.Printf("Добавлен: ")
+    db.PrintUser(user1)
+    fmt.Printf("Добавлен: ")
+    db.PrintUser(user2)
+    fmt.Printf("Добавлен: ")
+    db.PrintUser(user3)
+    
+    // READ - читаем пользователя
+    fmt.Println("\n📖 Читаем пользователя с ID=2:")
+    if user, found := db.GetUser(2); found {
+        db.PrintUser(user)
+    } else {
+        fmt.Println("Пользователь не найден")
+    }
+    
+    // UPDATE - обновляем пользователя
+    fmt.Println("\n✏️ Обновляем возраст пользователя с ID=1:")
+    if db.UpdateUser(1, "Алексей Петров", "alex@example.com", "Москва", 26) {
+        user, _ := db.GetUser(1)
+        fmt.Printf("Обновлён: ")
+        db.PrintUser(user)
+    }
+    
+    // SEARCH - ищем по городу
+    fmt.Println("\n🔍 Пользователи из Москвы:")
+    moscowUsers := db.FindUsersByCity("Москва")
+    for _, user := range moscowUsers {
+        db.PrintUser(user)
+    }
+    
+    // STATS - статистика
+    fmt.Printf("\n📊 Средний возраст пользователей: %.1f лет\n", db.GetAverageAge())
+    
+    // DELETE - удаляем пользователя
+    fmt.Println("\n🗑️ Удаляем пользователя с ID=2:")
+    if db.DeleteUser(2) {
+        fmt.Println("Пользователь успешно удалён")
+    }
+    
+    fmt.Printf("\nОстальных пользователей в БД: %d\n", len(db.Users))
+    
+    fmt.Println("\n✅ Демонстрация завершена!")
+}</code></pre>
+
+                <h4>📋 Пример вывода программы:</h4>
+                <pre><code>🗄️ Демонстрация работы In-Memory базы данных
+==================================================
+
+📝 Добавляем пользователей:
+Добавлен: ID: 1, Имя: Алексей Петров, Email: alex@example.com, Возраст: 25, Город: Москва
+Добавлен: ID: 2, Имя: Мария Иванова, Email: maria@example.com, Возраст: 30, Город: СПб
+Добавлен: ID: 3, Имя: Иван Сидоров, Email: ivan@example.com, Возраст: 28, Город: Москва
+
+📖 Читаем пользователя с ID=2:
+ID: 2, Имя: Мария Иванова, Email: maria@example.com, Возраст: 30, Город: СПб
+
+✏️ Обновляем возраст пользователя с ID=1:
+Обновлён: ID: 1, Имя: Алексей Петров, Email: alex@example.com, Возраст: 26, Город: Москва
+
+🔍 Пользователи из Москвы:
+ID: 1, Имя: Алексей Петров, Email: alex@example.com, Возраст: 26, Город: Москва
+ID: 3, Имя: Иван Сидоров, Email: ivan@example.com, Возраст: 28, Город: Москва
+
+📊 Средний возраст пользователей: 28.0 лет
+
+🗑️ Удаляем пользователя с ID=2:
+Пользователь успешно удалён
+
+Остальных пользователей в БД: 2
+
+✅ Демонстрация завершена!</code></pre>
+
+                <p><strong>🎯 Что изучили:</strong></p>
+                <ul>
+                    <li><strong>Структуры</strong> — для создания пользовательских типов данных</li>
+                    <li><strong>Maps</strong> — для быстрого доступа к данным по ключу</li>
+                    <li><strong>Slices</strong> — для работы с динамическими массивами</li>
+                    <li><strong>Функции и методы</strong> — для организации логики</li>
+                    <li><strong>Циклы</strong> — для перебора данных</li>
+                    <li><strong>Условия</strong> — для принятия решений в коде</li>
+                </ul>
+
+                <p><strong>🚀 Дальнейшее развитие:</strong></p>
+                <ul>
+                    <li>Добавить индексы для ускорения поиска</li>
+                    <li>Реализовать сохранение в файл</li>
+                    <li>Добавить поддержку concurrent доступа (mutex)</li>
+                    <li>Создать REST API для работы с БД</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

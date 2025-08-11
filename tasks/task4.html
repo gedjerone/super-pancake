@@ -1,0 +1,550 @@
+<!-- Разделитель для задач на слайсы -->
+<div style="margin: 40px 0; text-align: center; color: #6c757d; font-size: 1.2em; font-weight: 600;">
+    🧠 Задачи на понимание слайсов и append
+</div>
+
+<!-- Slice Task 1 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice1')">
+        <div class="task-title">Slice Quiz 1 - Базовый append</div>
+        <div class="task-number">S1</div>
+    </div>
+    <div class="task-content" id="slice1" style="display: none;">
+        <div class="task-description">
+            Проанализируйте код и определите, что произойдет с исходным слайсом:
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">arr := []int{1, 2, 3}
+fmt.Printf("len=%d, cap=%d\n", len(arr), cap(arr)) // len=3, cap=3
+arr1 := append(arr, 4)
+fmt.Println(arr)  // ?
+fmt.Println(arr1) // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice1" data-answer="wrong1">
+                    <span>arr: [1, 2, 3, 4], arr1: [1, 2, 3, 4]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice1" data-answer="correct">
+                    <span>arr: [1, 2, 3], arr1: [1, 2, 3, 4]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice1" data-answer="wrong2">
+                    <span>arr: [1, 2, 3], arr1: [1, 2, 3]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice1')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice1"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice1" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• Исходный слайс имеет capacity = 3, что равно его длине</p>
+                <p>• При добавлении элемента capacity не хватает</p>
+                <p>• Go создает новый underlying array с большей capacity</p>
+                <p>• Исходный слайс остается неизменным: [1, 2, 3]</p>
+                <p>• Новый слайс получает копию данных + новый элемент: [1, 2, 3, 4]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 2 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice2')">
+        <div class="task-title">Slice Quiz 2 - Append с достаточной capacity</div>
+        <div class="task-number">S2</div>
+    </div>
+    <div class="task-content" id="slice2" style="display: none;">
+        <div class="task-description">
+            Проанализируйте код, где у слайса есть запасная capacity:
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">arr := make([]int, 3, 5) // len=3, cap=5
+arr[0], arr[1], arr[2] = 1, 2, 3
+fmt.Printf("len=%d, cap=%d\n", len(arr), cap(arr))
+arr1 := append(arr, 4)
+fmt.Println(arr)  // ?
+fmt.Println(arr1) // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice2" data-answer="correct">
+                    <span>arr: [1, 2, 3, 4], arr1: [1, 2, 3, 4]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice2" data-answer="wrong1">
+                    <span>arr: [1, 2, 3], arr1: [1, 2, 3, 4]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice2" data-answer="wrong2">
+                    <span>arr: [1, 2, 3], arr1: [1, 2, 3]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice2')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice2"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice2" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• Слайс создан с capacity = 5, но длиной = 3</p>
+                <p>• Есть запасное место в underlying array</p>
+                <p>• append не создает новый массив, а использует существующий</p>
+                <p>• Оба слайса ссылаются на один underlying array</p>
+                <p>• Изменение затрагивает оба слайса: arr и arr1 показывают [1, 2, 3, 4]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 3 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice3')">
+        <div class="task-title">Slice Quiz 3 - Множественный append</div>
+        <div class="task-number">S3</div>
+    </div>
+    <div class="task-content" id="slice3" style="display: none;">
+        <div class="task-description">
+            Что произойдет при добавлении нескольких элементов одновременно?
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">arr := []int{1, 2, 3, 4, 5}  // len=5, cap=5
+arr1 := append(arr, 6)
+arr2 := append(arr, 7, 8)
+fmt.Println(arr)  // ?
+fmt.Println(arr1) // ?
+fmt.Println(arr2) // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice3" data-answer="wrong1">
+                    <span>arr: [1,2,3,4,5,6], arr1: [1,2,3,4,5,6], arr2: [1,2,3,4,5,7,8]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice3" data-answer="correct">
+                    <span>arr: [1,2,3,4,5], arr1: [1,2,3,4,5,6], arr2: [1,2,3,4,5,7,8]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice3" data-answer="wrong2">
+                    <span>arr: [1,2,3,4,5], arr1: [1,2,3,4,5,7], arr2: [1,2,3,4,5,7,8]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice3')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice3"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice3" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• Исходный слайс заполнен полностью (len = cap = 5)</p>
+                <p>• Каждый append создает новый underlying array</p>
+                <p>• arr остается неизменным: [1, 2, 3, 4, 5]</p>
+                <p>• arr1 и arr2 - независимые слайсы с новыми массивами</p>
+                <p>• Каждый append работает с оригинальным arr, а не с результатом предыдущего</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 4 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice4')">
+        <div class="task-title">Slice Quiz 4 - Append к срезу</div>
+        <div class="task-number">S4</div>
+    </div>
+    <div class="task-content" id="slice4" style="display: none;">
+        <div class="task-description">
+            Что произойдет при работе с срезом слайса?
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">original := []int{1, 2, 3, 4, 5, 6} // len=6, cap=6
+slice1 := original[1:4]  // [2, 3, 4] len=3, cap=5
+slice2 := append(slice1, 99)
+fmt.Println(original) // ?
+fmt.Println(slice1)   // ?
+fmt.Println(slice2)   // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice4" data-answer="wrong1">
+                    <span>original: [1,2,3,4,5,6], slice1: [2,3,4], slice2: [2,3,4,99]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice4" data-answer="correct">
+                    <span>original: [1,2,3,4,99,6], slice1: [2,3,4], slice2: [2,3,4,99]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice4" data-answer="wrong2">
+                    <span>original: [1,2,3,4,5,6], slice1: [2,3,4,99], slice2: [2,3,4,99]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice4')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice4"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice4" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• slice1 ссылается на элементы [1:4] в original (индексы 1,2,3)</p>
+                <p>• capacity slice1 = 5 (от позиции 1 до конца original)</p>
+                <p>• При append(slice1, 99) есть место в underlying array</p>
+                <p>• 99 записывается в позицию 4 original массива</p>
+                <p>• original изменяется: [1,2,3,4,99,6], но slice1 видит только [2,3,4]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 5 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice5')">
+        <div class="task-title">Slice Quiz 5 - Переполнение capacity</div>
+        <div class="task-number">S5</div>
+    </div>
+    <div class="task-content" id="slice5" style="display: none;">
+        <div class="task-description">
+            Что случится при превышении capacity у среза?
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">original := []int{1, 2, 3, 4}      // len=4, cap=4
+slice1 := original[1:3]            // [2, 3] len=2, cap=3
+slice2 := append(slice1, 99, 100, 101)
+fmt.Println(original) // ?
+fmt.Println(slice1)   // ?
+fmt.Println(slice2)   // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice5" data-answer="wrong1">
+                    <span>original: [1,2,3,99,100,101], slice1: [2,3], slice2: [2,3,99,100,101]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice5" data-answer="correct">
+                    <span>original: [1,2,3,99], slice1: [2,3], slice2: [2,3,99,100,101]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice5" data-answer="wrong2">
+                    <span>original: [1,2,3,4], slice1: [2,3], slice2: [2,3,99,100,101]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice5')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice5"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice5" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• slice1 имеет capacity = 3 (может добавить только 1 элемент)</p>
+                <p>• При добавлении 3 элементов capacity недостаточно</p>
+                <p>• Go создает новый underlying array для slice2</p>
+                <p>• Первый элемент 99 помещается в original (есть место)</p>
+                <p>• Остальные элементы 100,101 идут в новый массив для slice2</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 6 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice6')">
+        <div class="task-title">Slice Quiz 6 - Сложный случай</div>
+        <div class="task-number">S6</div>
+    </div>
+    <div class="task-content" id="slice6" style="display: none;">
+        <div class="task-description">
+            Финальный тест на понимание поведения слайсов:
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">a := make([]int, 2, 4)         // [0, 0] len=2, cap=4
+a[0], a[1] = 1, 2
+b := append(a, 3)              // что с a и b?
+c := append(a, 4)              // что с a, b и c?
+fmt.Println(a) // ?
+fmt.Println(b) // ?
+fmt.Println(c) // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice6" data-answer="wrong1">
+                    <span>a: [1,2], b: [1,2,3], c: [1,2,4]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice6" data-answer="wrong2">
+                    <span>a: [1,2,4], b: [1,2,3], c: [1,2,4]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice6" data-answer="correct">
+                    <span>a: [1,2], b: [1,2,4], c: [1,2,4]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice6')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice6"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice6" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• Слайс 'a' имеет capacity = 4, может добавлять элементы</p>
+                <p>• append(a, 3) создает 'b', добавляет 3 в позицию 2</p>
+                <p>• append(a, 4) создает 'c', тоже добавляет в позицию 2, перезаписывая 3</p>
+                <p>• Все слайсы используют один underlying array</p>
+                <p>• В итоге: a видит [1,2], но b и c видят [1,2,4] (4 перезаписало 3)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 7 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice7')">
+        <div class="task-title">Slice Quiz 7 - Copy vs Append</div>
+        <div class="task-number">S7</div>
+    </div>
+    <div class="task-content" id="slice7" style="display: none;">
+        <div class="task-description">
+            Сравните поведение copy() и append() на одних и тех же данных:
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">source := []int{10, 20, 30}
+target1 := make([]int, 3)
+copy(target1, source)
+target1[0] = 99
+
+target2 := append([]int{}, source...)
+target2[0] = 88
+
+fmt.Println(source)  // ?
+fmt.Println(target1) // ?
+fmt.Println(target2) // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice7" data-answer="wrong1">
+                    <span>source: [99,20,30], target1: [99,20,30], target2: [88,20,30]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice7" data-answer="correct">
+                    <span>source: [10,20,30], target1: [99,20,30], target2: [88,20,30]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice7" data-answer="wrong2">
+                    <span>source: [88,20,30], target1: [99,20,30], target2: [88,20,30]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice7')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice7"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice7" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• copy() и append() создают независимые копии данных</p>
+                <p>• target1 создается через make() и copy() - новый underlying array</p>
+                <p>• target2 создается через append() к пустому слайсу - тоже новый массив</p>
+                <p>• Изменения в target1 и target2 не влияют на source</p>
+                <p>• source остается неизменным: [10, 20, 30]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 8 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice8')">
+        <div class="task-title">Slice Quiz 8 - Nested Append</div>
+        <div class="task-number">S8</div>
+    </div>
+    <div class="task-content" id="slice8" style="display: none;">
+        <div class="task-description">
+            Что происходит при вложенных операциях append?
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">base := make([]int, 2, 6)  // [0, 0] len=2, cap=6
+base[0], base[1] = 1, 2
+
+step1 := append(base, 3)          // [1, 2, 3]
+step2 := append(step1, 4, 5)      // [1, 2, 3, 4, 5]
+step3 := append(base, 9)          // что тут?
+
+fmt.Println(base)  // ?
+fmt.Println(step1) // ?
+fmt.Println(step2) // ?
+fmt.Println(step3) // ?</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Что будет выведено?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice8" data-answer="wrong1">
+                    <span>base: [1,2], step1: [1,2,3], step2: [1,2,3,4,5], step3: [1,2,9]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice8" data-answer="correct">
+                    <span>base: [1,2], step1: [1,2,9], step2: [1,2,9,4,5], step3: [1,2,9]</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice8" data-answer="wrong2">
+                    <span>base: [1,2,9], step1: [1,2,9], step2: [1,2,3,4,5], step3: [1,2,9]</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice8')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice8"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice8" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• Все операции используют один underlying array (capacity = 6)</p>
+                <p>• step1 добавляет 3 в позицию 2: [1,2,3,?,?,?]</p>
+                <p>• step2 добавляет 4,5 в позиции 3,4: [1,2,3,4,5,?]</p>
+                <p>• step3 добавляет 9 в позицию 2, перезаписывая 3: [1,2,9,4,5,?]</p>
+                <p>• step1 и step2 видят изменения, так как используют тот же массив</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 9 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice9')">
+        <div class="task-title">Slice Quiz 9 - Capacity Doubling</div>
+        <div class="task-number">S9</div>
+    </div>
+    <div class="task-content" id="slice9" style="display: none;">
+        <div class="task-description">
+            Изучите, как Go увеличивает capacity при росте слайса:
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">s := []int{1, 2}               // len=2, cap=2
+fmt.Printf("Initial: len=%d, cap=%d\n", len(s), cap(s))
+
+s = append(s, 3)               // что с capacity?
+fmt.Printf("After 1: len=%d, cap=%d\n", len(s), cap(s))
+
+s = append(s, 4, 5)            // что теперь?
+fmt.Printf("After 2: len=%d, cap=%d\n", len(s), cap(s))</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Какие значения capacity будут выведены?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice9" data-answer="wrong1">
+                    <span>Initial: cap=2, After 1: cap=3, After 2: cap=5</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice9" data-answer="correct">
+                    <span>Initial: cap=2, After 1: cap=4, After 2: cap=8</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice9" data-answer="wrong2">
+                    <span>Initial: cap=2, After 1: cap=4, After 2: cap=6</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice9')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice9"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice9" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• Go удваивает capacity при превышении для маленьких слайсов</p>
+                <p>• Начальная capacity = 2</p>
+                <p>• При добавлении 3-го элемента: capacity = 2 * 2 = 4</p>
+                <p>• При добавлении 4-го и 5-го элементов: нужна capacity ≥ 5</p>
+                <p>• Go снова удваивает: 4 * 2 = 8</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slice Task 10 -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('slice10')">
+        <div class="task-title">Slice Quiz 10 - Nil vs Empty</div>
+        <div class="task-number">S10</div>
+    </div>
+    <div class="task-content" id="slice10" style="display: none;">
+        <div class="task-description">
+            В чем разница между nil слайсом и пустым слайсом?
+        </div>
+        <div class="example">
+            <div class="example-title">Код:</div>
+            <pre><code class="language-go">var nilSlice []int
+emptySlice := []int{}
+madeSlice := make([]int, 0)
+
+fmt.Printf("nil: len=%d, cap=%d, nil=%t\n", 
+    len(nilSlice), cap(nilSlice), nilSlice == nil)
+fmt.Printf("empty: len=%d, cap=%d, nil=%t\n", 
+    len(emptySlice), cap(emptySlice), emptySlice == nil)
+fmt.Printf("made: len=%d, cap=%d, nil=%t\n", 
+    len(madeSlice), cap(madeSlice), madeSlice == nil)</code></pre>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-question">Какие значения nil будут выведены?</div>
+            <div class="quiz-options">
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice10" data-answer="wrong1">
+                    <span>nil: nil=true, empty: nil=true, made: nil=true</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice10" data-answer="correct">
+                    <span>nil: nil=true, empty: nil=false, made: nil=false</span>
+                </label>
+                <label class="quiz-option">
+                    <input type="checkbox" data-quiz="slice10" data-answer="wrong2">
+                    <span>nil: nil=false, empty: nil=false, made: nil=false</span>
+                </label>
+            </div>
+            <button class="button hint" onclick="checkQuiz('slice10')">✅ Проверить ответ</button>
+            <div class="quiz-result" id="result-slice10"></div>
+        </div>
+
+        <div class="hidden-content" id="explanation-slice10" style="display: none;">
+            <div class="hint-title">💡 Объяснение:</div>
+            <div class="hint-content">
+                <p>• nil слайс: не имеет underlying array, pointer = nil</p>
+                <p>• []int{}: пустой слайс с underlying array, pointer ≠ nil</p>
+                <p>• make([]int, 0): тоже создает underlying array, pointer ≠ nil</p>
+                <p>• Все имеют len=0, cap=0, но только nil слайс равен nil</p>
+                <p>• append() работает одинаково со всеми тремя</p>
+            </div>
+        </div>
+    </div>
+</div>

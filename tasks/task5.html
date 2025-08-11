@@ -1,0 +1,505 @@
+<!-- Разделитель для задач на мапы -->
+<div style="margin: 40px 0; text-align: center; color: #6c757d; font-size: 1.2em; font-weight: 600;">
+    🗺️ Задачи на работу с мапами (Maps)
+</div>
+
+<!-- Map Task 1: CreateBasicMap - Легкая -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map1')">
+        <div class="task-title">CreateBasicMap - Создание и заполнение мапы</div>
+        <div class="task-number">M1</div>
+    </div>
+    <div class="task-content" id="map1" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая создает мапу для хранения возрастов людей, добавляет в неё трех
+            людей
+            и возвращает мапу.
+            Используйте имена: "Алиса" (25), "Боб" (30), "Чарли" (35).
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">ages := CreateBasicMap()
+fmt.Println(ages["Алиса"]) → 25
+fmt.Println(ages["Боб"]) → 30</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM1')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM1')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM1">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте мапу с помощью make(map[string]int)</p>
+                <p>• Добавьте элементы через ages["имя"] = возраст</p>
+                <p>• Верните готовую мапу</p>
+                <p>• Тип возврата: map[string]int</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM1">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CreateBasicMap() map[string]int {
+    ages := make(map[string]int)
+    ages["Алиса"] = 25
+    ages["Боб"] = 30
+    ages["Чарли"] = 35
+    return ages
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 2: CheckKeyExists - Легкая -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map2')">
+        <div class="task-title">CheckKeyExists - Проверка существования ключа</div>
+        <div class="task-number">M2</div>
+    </div>
+    <div class="task-content" id="map2" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает мапу строк к числам и ключ, и возвращает true, если ключ
+            существует в мапе.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">ages := map[string]int{"Алиса": 25, "Боб": 30}
+CheckKeyExists(ages, "Алиса") → true
+CheckKeyExists(ages, "Чарли") → false</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM2')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM2')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM2">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Используйте синтаксис value, ok := map[key]</p>
+                <p>• Переменная ok указывает, существует ли ключ</p>
+                <p>• Верните значение ok</p>
+                <p>• Значение value можно игнорировать через _</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM2">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CheckKeyExists(m map[string]int, key string) bool {
+    _, ok := m[key]
+    return ok
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 3: CountValues - Средняя -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map3')">
+        <div class="task-title">CountValues - Подсчет значений в мапе</div>
+        <div class="task-number">M3</div>
+    </div>
+    <div class="task-content" id="map3" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает мапу строк к числам и целевое значение, и возвращает
+            количество ключей, которые имеют это значение.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">scores := map[string]int{"Алиса": 95, "Боб": 87, "Чарли": 95, "Дэйв": 92}
+CountValues(scores, 95) → 2  // Алиса и Чарли имеют 95
+CountValues(scores, 100) → 0 // никто не имеет 100</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM3')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM3')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM3">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте счетчик count</p>
+                <p>• Переберите мапу с помощью range</p>
+                <p>• Сравните каждое значение с целевым</p>
+                <p>• Увеличивайте счетчик при совпадении</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM3">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CountValues(m map[string]int, target int) int {
+    count := 0
+    for _, value := range m {
+        if value == target {
+            count++
+        }
+    }
+    return count
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 4: GetKeysWithMinValue - Средняя -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map4')">
+        <div class="task-title">GetKeysWithMinValue - Ключи с минимальным значением</div>
+        <div class="task-number">M4</div>
+    </div>
+    <div class="task-content" id="map4" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает мапу строк к числам и возвращает слайс ключей, которые
+            имеют
+            минимальное значение в мапе.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">scores := map[string]int{"Алиса": 85, "Боб": 78, "Чарли": 78, "Дэйв": 92}
+GetKeysWithMinValue(scores) → []string{"Боб", "Чарли"}  // оба имеют 78</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM4')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM4')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM4">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Сначала найдите минимальное значение в мапе</p>
+                <p>• Затем соберите все ключи с этим значением</p>
+                <p>• Используйте два прохода по мапе</p>
+                <p>• Проверьте, что мапа не пустая</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM4">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func GetKeysWithMinValue(m map[string]int) []string {
+    if len(m) == 0 {
+        return []string{}
+    }
+    
+    // Находим минимальное значение
+    minValue := 0
+    first := true
+    for _, value := range m {
+        if first || value < minValue {
+            minValue = value
+            first = false
+        }
+    }
+    
+    // Собираем ключи с минимальным значением
+    var keys []string
+    for key, value := range m {
+        if value == minValue {
+            keys = append(keys, key)
+        }
+    }
+    return keys
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 5: MergeMaps - Средняя -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map5')">
+        <div class="task-title">MergeMaps - Объединение двух мап</div>
+        <div class="task-number">M5</div>
+    </div>
+    <div class="task-content" id="map5" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает две мапы строк к числам и возвращает новую мапу,
+            содержащую
+            все ключи из обеих мап. Если ключ есть в обеих мапах, используйте значение из второй мапы.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">map1 := map[string]int{"a": 1, "b": 2, "c": 3}
+map2 := map[string]int{"b": 20, "d": 4}
+result := MergeMaps(map1, map2)
+// result: map[string]int{"a": 1, "b": 20, "c": 3, "d": 4}</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM5')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM5')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM5">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте новую мапу для результата</p>
+                <p>• Скопируйте все элементы из первой мапы</p>
+                <p>• Скопируйте все элементы из второй мапы (они перезапишут дубликаты)</p>
+                <p>• Используйте range для перебора мап</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM5">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func MergeMaps(map1, map2 map[string]int) map[string]int {
+    result := make(map[string]int)
+    
+    // Копируем первую мапу
+    for key, value := range map1 {
+        result[key] = value
+    }
+    
+    // Копируем вторую мапу (перезаписывает дубликаты)
+    for key, value := range map2 {
+        result[key] = value
+    }
+    
+    return result
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 6: GroupByValue - Сложная -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map6')">
+        <div class="task-title">GroupByValue - Группировка по значениям</div>
+        <div class="task-number">M6</div>
+    </div>
+    <div class="task-content" id="map6" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает мапу строк к числам и возвращает мапу, где ключи - это
+            значения из исходной мапы, а значения - слайсы ключей, которые имели эти значения.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">scores := map[string]int{"Алиса": 95, "Боб": 87, "Чарли": 95, "Дэйв": 87}
+result := GroupByValue(scores)
+// result: map[int][]string{95: ["Алиса", "Чарли"], 87: ["Боб", "Дэйв"]}</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM6')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM6')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM6">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте мапу map[int][]string для результата</p>
+                <p>• Переберите исходную мапу</p>
+                <p>• Для каждого значения добавьте ключ в соответствующий слайс</p>
+                <p>• Используйте append для добавления в слайс</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM6">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func GroupByValue(m map[string]int) map[int][]string {
+    result := make(map[int][]string)
+    
+    for key, value := range m {
+        result[value] = append(result[value], key)
+    }
+    
+    return result
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 7: FilterMap - Сложная -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map7')">
+        <div class="task-title">FilterMap - Фильтрация мапы по условию</div>
+        <div class="task-number">M7</div>
+    </div>
+    <div class="task-content" id="map7" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает мапу строк к числам и два числа (min и max), и
+            возвращает
+            новую мапу, содержащую только те пары ключ-значение, где значение находится в диапазоне
+            [min,
+            max].
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">scores := map[string]int{"Алиса": 95, "Боб": 65, "Чарли": 78, "Дэйв": 45}
+result := FilterMap(scores, 70, 90)
+// result: map[string]int{"Чарли": 78}  // только 78 в диапазоне 70-90</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM7')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM7')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM7">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте новую мапу для результата</p>
+                <p>• Переберите исходную мапу</p>
+                <p>• Проверьте: value >= min && value <= max</p>
+                        <p>• Добавьте подходящие пары в результат</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM7">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func FilterMap(m map[string]int, min, max int) map[string]int {
+    result := make(map[string]int)
+    
+    for key, value := range m {
+        if value >= min && value <= max {
+            result[key] = value
+        }
+    }
+    
+    return result
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 8: InvertMap - Сложная -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map8')">
+        <div class="task-title">InvertMap - Обращение мапы</div>
+        <div class="task-number">M8</div>
+    </div>
+    <div class="task-content" id="map8" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает мапу строк к числам и возвращает обращенную мапу чисел к
+            строкам. Если несколько ключей имеют одинаковое значение, в результате должен остаться любой
+            из
+            них.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">ages := map[string]int{"Алиса": 25, "Боб": 30, "Чарли": 25}
+result := InvertMap(ages)
+// result: map[int]string{25: "Алиса" или "Чарли", 30: "Боб"}</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM8')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM8')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM8">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте мапу map[int]string для результата</p>
+                <p>• Переберите исходную мапу</p>
+                <p>• Поменяйте местами ключи и значения</p>
+                <p>• result[value] = key</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM8">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func InvertMap(m map[string]int) map[int]string {
+    result := make(map[int]string)
+    
+    for key, value := range m {
+        result[value] = key
+    }
+    
+    return result
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 9: CountWordFrequency - Очень сложная -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map9')">
+        <div class="task-title">CountWordFrequency - Подсчет частоты слов</div>
+        <div class="task-number">M9</div>
+    </div>
+    <div class="task-content" id="map9" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает слайс строк (слов) и возвращает мапу, где ключи - это
+            уникальные слова, а значения - количество их вхождений в слайсе.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">words := []string{"apple", "banana", "apple", "cherry", "banana", "apple"}
+result := CountWordFrequency(words)
+// result: map[string]int{"apple": 3, "banana": 2, "cherry": 1}</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM9')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM9')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM9">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте мапу map[string]int для подсчета</p>
+                <p>• Переберите слайс слов</p>
+                <p>• Для каждого слова увеличьте счетчик в мапе</p>
+                <p>• Используйте frequency[word]++ для увеличения</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM9">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func CountWordFrequency(words []string) map[string]int {
+    frequency := make(map[string]int)
+    
+    for _, word := range words {
+        frequency[word]++
+    }
+    
+    return frequency
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Map Task 10: FindMapDifferences - Очень сложная -->
+<div class="task">
+    <div class="task-header" onclick="toggleTask('map10')">
+        <div class="task-title">FindMapDifferences - Поиск различий между мапами</div>
+        <div class="task-number">M10</div>
+    </div>
+    <div class="task-content" id="map10" style="display: none;">
+        <div class="task-description">
+            Создайте функцию, которая принимает две мапы строк к числам и возвращает три слайса: ключи
+            только в первой мапе, ключи только во второй мапе, и ключи с разными значениями в обеих
+            мапах.
+        </div>
+        <div class="example">
+            <div class="example-title">Пример:</div>
+            <pre><code class="language-go">map1 := map[string]int{"a": 1, "b": 2, "c": 3}
+map2 := map[string]int{"b": 20, "c": 3, "d": 4}
+only1, only2, different := FindMapDifferences(map1, map2)
+// only1: ["a"], only2: ["d"], different: ["b"]</code></pre>
+        </div>
+        <button class="button hint" onclick="toggleHint('hintM10')">💡 Показать подсказку</button>
+        <button class="button solution" onclick="toggleSolution('solutionM10')">🔍 Показать
+            решение</button>
+
+        <div class="hidden-content" id="hintM10">
+            <div class="hint-title">💡 Подсказка:</div>
+            <div class="hint-content">
+                <p>• Создайте три слайса для результатов</p>
+                <p>• Переберите первую мапу и проверьте наличие ключей во второй</p>
+                <p>• Переберите вторую мапу и найдите уникальные ключи</p>
+                <p>• Сравните значения для общих ключей</p>
+            </div>
+        </div>
+
+        <div class="hidden-content solution-content" id="solutionM10">
+            <div class="solution-title">🔍 Решение:</div>
+            <pre><code class="language-go">func FindMapDifferences(map1, map2 map[string]int) ([]string, []string, []string) {
+    var only1, only2, different []string
+    
+    // Проверяем ключи из первой мапы
+    for key, value1 := range map1 {
+        if value2, exists := map2[key]; exists {
+            if value1 != value2 {
+                different = append(different, key)
+            }
+        } else {
+            only1 = append(only1, key)
+        }
+    }
+    
+    // Проверяем ключи только во второй мапе
+    for key := range map2 {
+        if _, exists := map1[key]; !exists {
+            only2 = append(only2, key)
+        }
+    }
+    
+    return only1, only2, different
+}</code></pre>
+        </div>
+    </div>
+</div>

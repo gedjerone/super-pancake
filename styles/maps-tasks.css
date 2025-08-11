@@ -1,0 +1,439 @@
+/* Современные стили для компонента задач на мапы */
+
+.maps-section {
+    background: #667eea;
+    border-radius: 20px;
+    margin: 40px 0;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+    animation: fadeInUp 0.8s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-header {
+    color: white;
+    padding: 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-header h2 {
+    margin: 0 0 15px 0;
+    font-size: 2.2em;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-header p {
+    margin: 0;
+    opacity: 0.95;
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+.quiz-tasks,
+.code-tasks {
+    background: white;
+    padding: 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.quiz-tasks h3,
+.code-tasks h3 {
+    color: #495057;
+    margin: 0 0 30px 0;
+    font-size: 1.6em;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.quiz-tasks h3:after,
+.code-tasks h3:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #667eea;
+    border-radius: 2px;
+}
+
+.map-task {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    margin: 0 0 20px 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.map-task:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.map-task .task-header {
+    background: #667eea;
+    color: white;
+    padding: 25px;
+    cursor: pointer;
+    border-radius: 16px 16px 0 0;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.map-task .task-header:hover {
+    background: #5a6fd8;
+}
+
+.map-task .task-title {
+    font-weight: 700;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.map-task .task-number {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-weight: 800;
+    min-width: 55px;
+    text-align: center;
+    font-size: 0.9em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-task .task-content {
+    background: white;
+    padding: 30px;
+    color: #495057;
+    border-radius: 0 0 16px 16px;
+}
+
+.map-task .task-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #6c757d;
+}
+
+/* Современные стили для квизов */
+.quiz-container {
+    margin: 25px 0;
+}
+
+.quiz-options {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    color: #495057;
+}
+
+.quiz-option:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(102, 126, 234, 0.1);
+    transition: left 0.6s ease;
+}
+
+.quiz-option:hover:before {
+    left: 100%;
+}
+
+.quiz-option:hover {
+    background: #f8f9fa;
+    border-color: #667eea;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.quiz-option input[type="radio"] {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+    accent-color: #667eea;
+    opacity: 1;
+}
+
+.quiz-option span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1em;
+    font-weight: 500;
+    color: #495057;
+}
+
+.quiz-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    border: 2px solid transparent;
+}
+
+.quiz-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    background: #5a6fd8;
+}
+
+.quiz-result {
+    margin-top: 15px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 500;
+    border: 1px solid;
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.quiz-success {
+    background: #f0f9ff;
+    color: #1e40af;
+    border-color: #3b82f6;
+}
+
+.quiz-error {
+    background: #fef2f2;
+    color: #dc2626;
+    border-color: #ef4444;
+}
+
+/* Современные стили для задач с кодом */
+.code-container {
+    margin: 25px 0;
+}
+
+.code-input {
+    width: 100%;
+    min-height: 140px;
+    padding: 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f8f9fa;
+    color: #2d3748;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    background: white;
+    color: #2d3748;
+    transform: translateY(-1px);
+}
+
+.check-code-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1em;
+    margin-top: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    border: 2px solid transparent;
+}
+
+.check-code-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    background: #5a6fd8;
+}
+
+.code-result {
+    margin-top: 15px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 500;
+    border: 1px solid;
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.code-success {
+    background: #f0f9ff;
+    color: #1e40af;
+    border-color: #3b82f6;
+}
+
+.code-error {
+    background: #fef2f2;
+    color: #dc2626;
+    border-color: #ef4444;
+}
+
+.code-success details {
+    margin-top: 12px;
+}
+
+.code-success summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #1e40af;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    margin-bottom: 10px;
+}
+
+.code-error ul {
+    margin: 12px 0;
+    padding-left: 20px;
+}
+
+.code-error li {
+    margin: 6px 0;
+    color: #dc2626;
+}
+
+.code-error details {
+    margin-top: 12px;
+}
+
+.code-error summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #dc2626;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+    margin-bottom: 10px;
+}
+
+/* Стили для блоков кода с подсветкой синтаксиса */
+.code-success pre,
+.code-error pre {
+    background: #f8f9fa !important;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 12px !important;
+    margin: 8px 0 !important;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    overflow-x: auto;
+}
+
+.code-success pre code,
+.code-error pre code {
+    background: none !important;
+    padding: 0 !important;
+    color: #2d3748;
+    font-weight: normal;
+}
+
+/* Стили для блоков решений */
+.code-success details[open] summary {
+    margin-bottom: 15px;
+}
+
+.code-error details[open] summary {
+    margin-bottom: 15px;
+}
+
+.expected-output {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.expected-output pre {
+    margin: 10px 0 0 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .maps-section {
+        margin: 20px 0;
+    }
+    
+    .section-header {
+        padding: 20px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .quiz-tasks,
+    .code-tasks {
+        padding: 20px;
+    }
+    
+    .map-task .task-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .map-task .task-content {
+        padding: 20px;
+    }
+    
+    .code-input {
+        font-size: 13px;
+    }
+    
+    .quiz-option span {
+        font-size: 0.9em;
+    }
+}
